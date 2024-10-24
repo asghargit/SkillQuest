@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillQuest - Home</title>
+    <link rel="stylesheet" href="../css/homescreen.css">
+    <script src="../../src/utils/firebaseConfig.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="#">SkillQuest</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="navbar-icons">
+            <a href="#"><i class='bx bxl-github'></i></a>
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+            <a href="#"><i class='bx bxl-google'></i></a>
+            <a href="#"><i class='bx bxl-linkedin'></i></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to SkillQuest</h1>
+        <p>Boost your skills with top-notch courses</p>
+        <a href="login.html" class="hero-button">Get Started</a>
+    </div>
+
+    <!-- Courses Section -->
+    <div class="home-container">
+        <h2 class="section-title">Featured Courses</h2>
+        <div class="course-grid">
+            <div class="course-card">
+                <h3>Java</h3>
+                <p>Learn the fundamentals of Java programming.</p>
+            </div>
+            <div class="course-card">
+                <h3>Python</h3>
+                <p>Master Python for data science and AI development.</p>
+            </div>
+            <div class="course-card">
+                <h3>Web Development</h3>
+                <p>Build modern websites using HTML, CSS, and JavaScript.</p>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+      
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            // User is signed in, you can show the dashboard or logged-in UI
+            console.log('User is signed in:', user);
+          } else {
+            // No user is signed in, redirect to login or show login UI
+            window.location.href = 'login.html'; // Example redirection to login page
+          }
+        });
+      </script>
+      
+</body>
+
+</html>
