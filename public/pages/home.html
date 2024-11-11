@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillQuest - Home</title>
     <link rel="stylesheet" href="../css/homescreen.css">
-    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body>
+    
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <a href="#">SkillQuest</a>
+    <nav class="w-screen flex justify-between p-3">
+        <div class="">
+            <a href="#" class="font-bold">SkillQuest</a>
         </div>
-        <div class="navbar-menu">
+        <div class="flex justify-center space-x-4 pages">
             <a href="#">Home</a>
             <a href="../pages/courses.html">Courses</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
         </div>
-        <div class="navbar-icons">
+        <div class="">
             <a href="#"><i class='bx bxl-github'></i></a>
             <a href="#"><i class='bx bxl-facebook'></i></a>
             <a href="#"><i class='bx bxl-google'></i></a>
             <a href="#"><i class='bx bxl-linkedin'></i></a>
+            <a href="#" class=" font-bold"><i class='bx bx-help-circle'></i> Ask a Question</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="hero-section">
+    <div class="bg-yellow-400 text-black flex flex-col items-center p-32">
         <h1>Welcome to SkillQuest</h1>
         <p>Boost your skills with top-notch courses</p>
-        <a href="../pages/login.html" class="hero-button">Get Started</a>
+        <a href="../pages/login.html" class=" bg-black text-yellow-400 p-2 px-5 mt-5 rounded-3xl">Get Started</a>
     </div>
 
     <!-- Courses Section -->
@@ -54,21 +56,18 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script> 
     <script type="module">
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
       
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            // User is signed in, you can show the dashboard or logged-in UI
             console.log('User is signed in:', user);
           } else {
-            // No user is signed in, redirect to login or show login UI
-            window.location.href = 'login.html'; // Example redirection to login page
+            window.location.href = 'login.html';
           }
         });
       </script>
-      
 </body>
-
 </html>
