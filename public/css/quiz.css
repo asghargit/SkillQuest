@@ -1,0 +1,339 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+/* Main Container */
+.quiz-container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto; /* Center horizontally */
+    background-color: #000000; /* Black background */
+    color: #ffd700; /* Yellow text */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+    position: absolute;
+}
+
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700; /* Yellow text */
+}
+/* Hint Button */
+.hint-button {
+    width: 60px; /* Circular size */
+    height: 60px;
+    background: linear-gradient(45deg, #333333, #555555);
+    color: #ffd700;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-button:hover {
+    background: linear-gradient(45deg, #444444, #666666);
+}
+
+.hint-button:active {
+    background: linear-gradient(45deg, #555555, #777777);
+    transform: scale(0.95);
+    box-shadow: 0 0 15px 10px rgba(255, 215, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2); /* Adds a yellow glow */
+}
+
+/* Click animation */
+@keyframes click-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.hint-button:active {
+    animation: click-animation 0.2s ease;
+}
+
+/* Hint button End */
+
+
+.timer {
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #ffd700; /* Yellow background for timer */
+    padding: 10px 20px;
+    border-radius: 50%;
+    color: #000000; /* Black text */
+}
+
+/* Question Section */
+.question-section {
+    background-color: #222222; /* Dark grey background for question area */
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    text-align: center;
+    color: #ffd700; /* Yellow text */
+}
+
+/* Options Section */
+.options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.option-button {
+    padding: 15px;
+    background-color: #333333; /* Dark grey for options */
+    color: #ffd700; /* Yellow text */
+    border: 2px solid #ffd700; /* Yellow border */
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.option-button:hover {
+    background-color: #444444; /* Lighter grey on hover */
+}
+
+.option-button.correct {
+    background-color: #ffd700; /* Yellow background for correct answer */
+    color: #000000; /* Black text */
+    border: 2px solid #ffd700; /* Yellow border */
+}
+
+.option-button.wrong {
+    background-color: #000000; /* Black background for wrong answer */
+    color: #ffd700; /* Yellow text */
+    border: 2px solid #ffd700; /* Yellow border */
+}
+
+/* Levels Section */
+.levels-container {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1rem;
+    color: #ffd700; /* Yellow text */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.levels-container ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+.levels-container li {
+    padding: 5px 0;
+    text-align: right;
+}
+
+
+/*Timer Css*/
+body {
+    background-color: #333;
+}
+
+#countdown {
+    margin: 10px;
+    height: 160px;
+    width: 160px;
+   
+}
+
+svg circle#c2 {
+    stroke-dasharray: 113px;
+    stroke-dashoffset: 0px;
+    stroke: #198051;
+    animation: countdown 45s linear forwards;
+}
+
+svg circle#c3 {
+    stroke: #198051;
+    opacity: 0.3;
+}
+
+circle#c1 {
+    fill: lime;
+    animation: rotate 45s linear forwards;
+}
+
+svg text {
+    font-family: sans-serif;
+    fill: white;
+    font-weight: bold;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-size: 12px;
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+    to {
+        stroke-dashoffset: 113px;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Background Animation */
+.area {
+    background: #000000; /* Black background */
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 96%;
+    overflow: hidden;
+  }
+  
+  .circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 0, 0.2); /* Yellow circles */
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+  }
+  
+  .circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+  }
+  
+  .circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+  }
+  
+  .circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+  }
+  
+  .circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+  }
+  
+  .circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+  }
+  
+  .circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+  }
+  
+  .circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+  }
+  
+  .circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+  }
+  
+  .circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+  }
+  
+  .circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+  }
+  
+  @keyframes animate {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+      border-radius: 0;
+    }
+  
+    100% {
+      transform: translateY(-1000px) rotate(720deg);
+      opacity: 0;
+      border-radius: 50%;
+    }
+  }
+  /*
+  -- End BackGround Animation 
+  */

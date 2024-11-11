@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body>
+     <!-- Background animation -->
+     <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!-- Main Quiz Container -->
+    <div class="quiz-container">
+        <!-- Top Bar with Timer and Score -->
+        <div class="top-bar">
+            <button class="hint-button">Hint</button>
+            <div id="countdown">
+                <svg viewBox="0 0 40 40">
+                    <g transform="translate(20 20) rotate(-90)" stroke-width="4" fill="none" stroke-linecap="round">
+                        <circle id="c3" r="18" />
+                        <circle id="c2" r="18" />
+                        <circle id="c1" r="2" cx="18" />
+                    </g>
+                    <text x="20" y="20" id="countdown-text">45</text>
+                </svg>
+            </div>
+            <button class="hint-button">Streak</button>
+
+
+        </div>
+
+        <!-- Question Display -->
+        <div class="question-section">
+            <div id="question-text">"In the Ramayan, apart from Sita, who accompanied Rama during his 'vanvaas'?"</div>
+        </div>
+
+        <!-- Answer Options -->
+        <div class="options-container">
+            <button class="option-button" id="optionA">A: Bharata</button>
+            <button class="option-button" id="optionB">B: Janaka</button>
+            <button class="option-button" id="optionC">C: Laxmana</button>
+            <button class="option-button" id="optionD">D: Shatrughana</button>
+        </div>
+
+       
+    </div>
+    
+    <script src="../js/quiz.js"></script>
+</body>
+</html>
