@@ -12,19 +12,24 @@ body {
 }
 /* Main Container */
 .quiz-container {
-    width: 100%;
-    max-width: 800px;
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 800px; /* Maintain max size for larger screens */
     margin: auto; /* Center horizontally */
-    background-color: #000000; /* Black background */
+    background: linear-gradient(145deg, #000000, #222222); /* Subtle gradient for depth */
     color: #ffd700; /* Yellow text */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 25px; /* Increased padding for a cleaner layout */
+    border-radius: 16px; /* Smoother rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(255, 255, 255, 0.05); /* Dual-layer shadow for depth */
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Center both horizontally and vertically */
     position: absolute;
+
+    /* Add a slight glow effect */
+    outline: 2px solid transparent; /* Initial outline is invisible */
+    outline-offset: -5px; /* Keep close to the edge */
+    transition: all 0.3s ease; /* Smooth transitions */
 }
 
 
@@ -105,35 +110,54 @@ body {
 .options-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 15px; /* Increased gap for better spacing */
     margin-top: 20px;
 }
 
 .option-button {
-    padding: 15px;
-    background-color: #333333; /* Dark grey for options */
+    padding: 14px 24px; /* Extra padding for pill shape */
+    background: linear-gradient(145deg, #333333, #222222); /* Subtle gradient for depth */
     color: #ffd700; /* Yellow text */
     border: 2px solid #ffd700; /* Yellow border */
-    border-radius: 8px;
-    font-size: 1.2rem;
+    border-radius: 50px; /* Pill shape */
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s, border 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(255, 255, 255, 0.1); /* Elevated shadow */
+    transition: all 0.3s ease;
+    text-align: center; /* Ensure text is centered */
 }
 
+/* Hover effect */
 .option-button:hover {
-    background-color: #444444; /* Lighter grey on hover */
+    background: linear-gradient(145deg, #444444, #333333); /* Lighter gradient on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4), 0 2px 5px rgba(255, 255, 255, 0.2); /* Enhanced shadow */
+    border-color: #ffe066; /* Slightly brighter yellow border */
 }
 
+/* Correct answer button */
 .option-button.correct {
-    background-color: #ffd700; /* Yellow background for correct answer */
+    background: linear-gradient(145deg, #ffd700, #e6b800); /* Vibrant yellow gradient */
     color: #000000; /* Black text */
     border: 2px solid #ffd700; /* Yellow border */
+    box-shadow: 0 6px 10px rgba(255, 215, 0, 0.5); /* Glow effect for correct answer */
+    transform: scale(1.05); /* Slightly larger size */
 }
 
+/* Wrong answer button */
 .option-button.wrong {
-    background-color: #000000; /* Black background for wrong answer */
+    background: linear-gradient(145deg, #000000, #222222); /* Dark gradient for wrong answer */
     color: #ffd700; /* Yellow text */
-    border: 2px solid #ffd700; /* Yellow border */
+    border: 2px solid #ff6347; /* Red border for wrong answer */
+    box-shadow: 0 4px 6px rgba(255, 99, 71, 0.5); /* Subtle red glow */
+    transform: scale(0.95); /* Slightly smaller size */
+}
+
+/* Focus state for keyboard navigation */
+.option-button:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 8px 2px #ffd700; /* Yellow glow for focus */
 }
 
 /* Levels Section */
@@ -344,7 +368,7 @@ svg text {
     bottom: 20px;
     right: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 15px;
     z-index: 1000; /* Ensure buttons stay above other elements */
 }
@@ -361,6 +385,7 @@ svg text {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(255, 255, 255, 0.1); /* Subtle shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    
 }
 
 /* Hover state for buttons */
@@ -377,8 +402,28 @@ svg text {
     transform: scale(0.98); /* Slight shrink effect */
 }
 
-/* Focus state for accessibility */
-.control-button:focus {
-    outline: 3px solid #000; /* Black focus ring */
-    outline-offset: 4px;
+/* Points Remaining Tab */
+/* Points Remaining Tab */
+.points-remaining {
+    position: absolute;
+    top: 10px; /* Position at the top-right corner of the container */
+    right: 10px;
+    background-color: #ffd700; /* Yellow background */
+    color: #000000; /* Black text */
+    font-weight: bold;
+    padding: 10px 15px; /* Padding for a compact look */
+    border-radius: 20px; /* Rounded shape */
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    z-index: 1; /* Ensure it stays on top of other elements */
 }
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .points-remaining {
+        font-size: 0.9rem; /* Slightly smaller text */
+        padding: 8px 12px; /* Compact padding */
+    }
+}
+
+

@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../css/quiz.css">
 </head>
 <body>
-     <!-- Background animation -->
-     <div class="area">
+    <!-- Background animation -->
+    <div class="area">
         <ul class="circles">
             <li></li>
             <li></li>
@@ -22,10 +22,16 @@
             <li></li>
         </ul>
     </div>
+    
     <!-- Main Quiz Container -->
     <div class="quiz-container">
-        <!-- Top Bar with Timer and Score -->
+        <!-- Top Bar with Timer, Score, and Points Remaining -->
         <div class="top-bar">
+            <!-- Points Remaining Tab -->
+            <div class="points-remaining">
+                Points Remaining: <span id="pointsValue">100</span>
+            </div>
+            
             <button class="hint-button">Hint</button>
             <div id="countdown">
                 <svg viewBox="0 0 40 40">
