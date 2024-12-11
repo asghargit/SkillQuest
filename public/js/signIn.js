@@ -10,7 +10,6 @@ export async function signIn() {
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        alert("User signed in successfully!");
         // Add any navigation or redirection here
         window.location.href = "home.html"; 
     } catch (error) {
