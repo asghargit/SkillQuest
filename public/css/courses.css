@@ -14,16 +14,17 @@ body {
 }
 
 h2 {
-    font-size: 26px;
+    font-size: 28px; /* Increased font size for the main heading */
     margin-bottom: 20px;
     color: #ffd700; /* Gold color */
 }
 
 .course-card {
-    width: 40%;
-    margin: 25px;
-    padding: 20px;
-    border-radius: 12px;
+    width: 300px; /* Fixed width for rectangle */
+    height: 200px; /* Fixed height for rectangle */
+    margin: 15px;
+    padding: 15px;
+    border-radius: 8px;
     display: inline-block;
     vertical-align: top;
     background: linear-gradient(135deg, #ffd700, #ffb400); /* Yellow gradient */
@@ -32,17 +33,19 @@ h2 {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: left;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .course-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .course-card img {
     width: 100%;
-    border-radius: 8px;
+    height: 100px; /* Half the card height */
+    object-fit: cover; /* Ensure image fits nicely */
+    border-radius: 6px;
     margin-bottom: 10px;
 }
 
@@ -62,15 +65,21 @@ h2 {
 .label.new { background-color: #44ff44; } /* Green color */
 .label.special { background-color: #4444ff; } /* Blue color */
 
-h3 {
-    font-size: 20px;
-    margin: 10px 0;
-    color: #121212;
+.course-card h3 {
+    font-size: 18px; /* Increased font size for the course title */
+    margin: 5px 0;
+    color: #000; /* Dark text */
+    font-weight: bold;
 }
 
-p {
-    margin: 5px 0;
-    color: #333;
+.course-card p {
+    font-size: 16px; /* Increased font size for the description */
+    margin: 0;
+    color: #000; /* Dark text */
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Ensure single line text */
 }
 
 .load-more {
@@ -80,7 +89,7 @@ p {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px; /* Increased font size for the button */
     font-weight: bold;
     margin-top: 20px;
     transition: background 0.3s ease;
