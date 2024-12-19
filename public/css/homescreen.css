@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #121212;
-    color: #f1c40f;
+    color:  #ffcc00;
 }
 
 /* Navbar Styles */
@@ -17,7 +17,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
+    background-color: #795757;
     padding: 1rem 2rem;
     position: fixed;
     width: 100%;
@@ -26,7 +26,7 @@ body {
 }
 
 .navbar a {
-    color: #f1c40f;
+    color: #FFF0D1;
     text-decoration: none;
     margin: 0 0.5rem;
 }
@@ -40,14 +40,14 @@ body {
 .hero-section {
     text-align: center;
     padding: 10rem 1rem;
-    background-color: #f1c40f;
+    background-color:  #ffcc00;
     color: #000;
     margin-top: 4rem;
 }
 
 .hero-button {
-    background-color: #000;
-    color: #f1c40f;
+    background-color: #121212;
+    color:  #ffcc00;;
     padding: 0.75rem 1.5rem;
     border-radius: 5px;
     text-decoration: none;
@@ -72,13 +72,97 @@ body {
 }
 
 .course-card {
-    background-color: #333;
-    color: #f1c40f;
-    padding: 1.5rem;
-    border-radius: 8px;
-    transition: transform 0.3s;
+  background-color: #ffcc00;
+  color: #111;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  font-weight: bold;
 }
+
 
 .course-card:hover {
     transform: scale(1.05);
 }
+
+:root {
+    --color-white: #fff;
+    --color-dark: #121212;
+    --color-bg: #fffcee;
+  }
+  
+  .emoji {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    border-radius: 26%;
+    background: linear-gradient(180deg, #6ed0e4 0%, #4abbe3 50%, #4ec2e5 100%);
+    box-shadow: inset -3px -3px 0px rgba(0, 0, 0, 0.05);
+  }
+  
+  .emoji_robot::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 5px;
+    background: var(--color-dark);
+    border-radius: 3px;
+  }
+  
+  .emoji__eyes {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .emoji__eye {
+    width: 10px;
+    height: 10px;
+    background: var(--color-white);
+    border-radius: 50%;
+  }
+  
+  .emoji__eye::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--color-dark);
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+  }
+  .emoji__mouth {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 5px;
+    background: var(--color-dark);
+    border-radius: 2px;
+  }
+  
+  
+  .emoji_robot {
+    animation: flasher 0.5s ease-in-out infinite;
+  }
+  
+  @keyframes flasher {
+    0% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  

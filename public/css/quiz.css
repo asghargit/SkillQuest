@@ -18,8 +18,8 @@ body {
     width: 90%; /* Adjust width for responsiveness */
     max-width: 800px; /* Maintain max size for larger screens */
     margin: auto; /* Center horizontally */
-    background: linear-gradient(145deg, #000000, #222222); /* Subtle gradient for depth */
-    color: #ffd700; /* Yellow text */
+    background: linear-gradient(145deg, #795757 #FFF0D1); /* Subtle gradient for depth */
+    color: #FFF0D1; /* Yellow text */
     padding: 25px; /* Increased padding for a cleaner layout */
     border-radius: 16px; /* Smoother rounded corners */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(255, 255, 255, 0.05); /* Dual-layer shadow for depth */
@@ -46,14 +46,14 @@ body {
 .score-display {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffd700; /* Yellow text */
+    color: #FFF0D1; /* Yellow text */
 }
 /* Hint Button */
 .hint-button {
     width: 60px; /* Circular size */
     height: 60px;
     background: linear-gradient(45deg, #333333, #555555);
-    color: #ffd700;
+    color: #FFF0D1;
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -92,21 +92,21 @@ body {
 .timer {
     font-size: 2rem;
     font-weight: bold;
-    background-color: #ffd700; /* Yellow background for timer */
+    background-color: #FFF0D1; /* Yellow background for timer */
     padding: 10px 20px;
     border-radius: 50%;
-    color: #000000; /* Black text */
+    color: #795757; /* Black text */
 }
 
 /* Question Section */
 .question-section {
-    background-color: #222222; /* Dark grey background for question area */
+    background-color: #795757; /* Dark grey background for question area */
     padding: 15px;
     margin-top: 15px;
     font-size: 1.3rem;
     border-radius: 8px;
     text-align: center;
-    color: #ffd700; /* Yellow text */
+    color: #FFF0D1; /* Yellow text */
 }
 
 /* Options Section */
@@ -119,9 +119,9 @@ body {
 
 .option-button {
     padding: 14px 24px; /* Extra padding for pill shape */
-    background: linear-gradient(145deg, #333333, #222222); /* Subtle gradient for depth */
-    color: #ffd700; /* Yellow text */
-    border: 2px solid #ffd700; /* Yellow border */
+    background: linear-gradient(145deg, #333333, #795757); /* Subtle gradient for depth */
+    color: #FFF0D1; /* Yellow text */
+    border: 2px solid #FFF0D1; /* Yellow border */
     border-radius: 50px; /* Pill shape */
     font-size: 1.1rem;
     font-weight: bold;
@@ -169,7 +169,7 @@ body {
     right: 10px;
     top: 10px;
     font-size: 1rem;
-    color: #ffd700; /* Yellow text */
+    color: #FFF0D1; /* Yellow text */
     background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
     padding: 10px;
     border-radius: 5px;
@@ -382,7 +382,7 @@ svg text {
     font-size: 16px;
     font-weight: bold;
     color: #000; /* Black text */
-    background: linear-gradient(45deg, #ffcc00, #ffdd33); /* Gradient yellow */
+    background: linear-gradient(45deg, #FFF0D1, #FFF0D1); /* Gradient yellow */
     border: 2px solid #000; /* Black border */
     border-radius: 50px; /* Pill-shaped buttons */
     cursor: pointer;
@@ -393,14 +393,14 @@ svg text {
 
 /* Hover state for buttons */
 .control-button:hover {
-    background: linear-gradient(45deg, #ffd700, #ffee55); /* Brighter gradient */
+    background: linear-gradient(45deg, #FFF0D1, #FFF0D1); /* Brighter gradient */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 2px 5px rgba(255, 255, 255, 0.2); /* Deeper shadow */
     transform: scale(1.05); /* Slight scaling effect */
 }
 
 /* Active state for buttons (on click) */
 .control-button:active {
-    background: linear-gradient(45deg, #ffbb00, #ffcc44); /* Slightly darker gradient */
+    background: linear-gradient(45deg, #FFF0d1, #FFF0d1); /* Slightly darker gradient */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Reduced shadow */
     transform: scale(0.98); /* Slight shrink effect */
 }
@@ -411,8 +411,8 @@ svg text {
     position: absolute;
     top: 10px; /* Position at the top-right corner of the container */
     right: 10px;
-    background-color: #ffd700; /* Yellow background */
-    color: #000000; /* Black text */
+    background-color: #795757; /* Yellow background */
+    color: #FFF0D1; /* Black text */
     font-weight: bold;
     padding: 10px 15px; /* Padding for a compact look */
     border-radius: 20px; /* Rounded shape */

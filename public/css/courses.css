@@ -14,7 +14,7 @@ body {
 }
 
 h2 {
-    font-size: 28px; /* Increased font size for the main heading */
+    font-size: 26px;
     margin-bottom: 20px;
     color: #ffd700; /* Gold color */
 }
@@ -66,14 +66,14 @@ h2 {
 .label.special { background-color: #4444ff; } /* Blue color */
 
 .course-card h3 {
-    font-size: 18px; /* Increased font size for the course title */
+    font-size: 16px;
     margin: 5px 0;
     color: #000; /* Dark text */
     font-weight: bold;
 }
 
 .course-card p {
-    font-size: 16px; /* Increased font size for the description */
+    font-size: 14px;
     margin: 0;
     color: #000; /* Dark text */
     font-weight: bold;
@@ -89,7 +89,7 @@ h2 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 18px; /* Increased font size for the button */
+    font-size: 16px;
     font-weight: bold;
     margin-top: 20px;
     transition: background 0.3s ease;

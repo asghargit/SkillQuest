@@ -10,10 +10,11 @@
 </head>
 
 <body>
+    
     <!-- Navbar -->
-    <nav class="w-screen flex justify-between items-center p-3">
-        <div class="font-bold">
-            <a href="#">QuestiFy</a>
+    <nav class="w-screen flex justify-between p-3">
+        <div class="">
+            <a href="#" class="font-bold">QuestiFy</a>
         </div>
         <div class="flex justify-center space-x-4 pages">
             <a href="#">Home</a>
@@ -21,29 +22,21 @@
             <a href="#">About</a>
             <a href="#">Contact Us</a>
         </div>
-        <div class="flex items-center space-x-4">
+        <div class="">
             <a href="#"><i class='bx bxl-github'></i></a>
             <a href="#"><i class='bx bxl-facebook'></i></a>
             <a href="#"><i class='bx bxl-google'></i></a>
             <a href="#"><i class='bx bxl-linkedin'></i></a>
-            <a href="#" class="font-bold"><i class='bx bx-help-circle'></i>Activate Questy</a>
-
-            <!-- Add Emoji -->
-            <div class="emoji emoji_robot">
-                <div class="emoji__eyes">
-                    <div class="emoji__eye"></div>
-                    <div class="emoji__eye"></div>
-                </div>
-                <div class="emoji__mouth"></div>
-            </div>
+            <a href="#" class=" font-bold"><i class='bx bx-help-circle'></i>Activate Questy</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="bg-[#ffcc00] text-[#121212] flex flex-col items-center p-32">
+    <div class="bg-[#FFF0D1] text-[#795757] flex flex-col items-center p-32">
+
         <h1>Welcome to QuestiFy</h1>
-        <p>Boost your skills with top-notch courses</p>
-        <a href="../pages/login.html" class="bg-[#121212] text-[#ffcc00] p-2 px-5 mt-5 rounded-3xl">Begin Your Journey Now</a>
+        <p>Boost your skills with top-notch courses</p><a href="../pages/login.html" class="bg-[#795757] text-[#FFF0D1] p-2 px-5 mt-5 rounded-3xl">Begin Your Journey Now</a>
+
     </div>
 
     <!-- Courses Section -->
@@ -64,7 +57,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script> 
     <script type="module">
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
@@ -77,6 +69,6 @@
             window.location.href = 'login.html';
           }
         });
-    </script>
+      </script>
 </body>
 </html>
