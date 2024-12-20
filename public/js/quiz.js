@@ -22,7 +22,7 @@ function timer(){
     }
 
     if (timeLeft <= 0) {
-        clearInterval(countdownInterval);
+        nextQuestion(questions_global)
     }
 }
 
@@ -31,13 +31,16 @@ questions_global = []
 document.getElementById('nextButton').addEventListener('click', ()=>{
     nextQuestion(questions_global)
 })
+document.getElementById('Hints').addEventListener('click', ()=>{
+    showHint(questions_global)
+})
 
 async function generateContent(apiKey, subject, level) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     const payload = {
         contents: [{
-            parts: [{ 'text': ```Write a list of MCQ questions and answers. There should be 20 questions in total. ${subject}. On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in json format as a list of questions. The question attribute is "question", "options" for options and "answer" for the answer. Just the json format.``` }]
+            parts: [{ 'text': ```Write a list of MCQ questions and answers and a hint. There should be 10 questions in total. ${subject}. On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in json format as a list of questions. The question attribute is "question", "options" for options and "answer" for the answer, "hint" for the hint. Just the json format.``` }]
         }]
     };
 
@@ -71,106 +74,127 @@ let current_index = 0;
 function loadQuestions() {
     questions_global = [
         {
-            "question": "Which library is commonly used for numerical computations in Python, often forming the base for machine learning?",
-            "options": ["pandas", "numpy", "matplotlib", "seaborn"],
-            "answer": "numpy"
+          "question": "What is the correct way to create a function in Python?",
+          "options": ["def function_name():", "function function_name():", "create function_name():", "function:function_name()"],
+          "answer": "def function_name():",
+          "hint": "Python uses 'def' to define functions."
         },
         {
-            "question": "Which library is primarily used for data manipulation and analysis in Python?",
-            "options": ["scikit-learn", "numpy", "pandas", "tensorflow"],
-            "answer": "pandas"
+          "question": "Which of the following is used to insert a comment in Python?",
+          "options": ["//", "#", "/* */", "<!-- -->"],
+          "answer": "#",
+          "hint": "Comments in Python start with a special symbol used for sharp notes."
         },
         {
-            "question": "What does 'ML' stand for?",
-            "options": ["Machine Logic", "Machine Learning", "Mathematical Language", "Model Learning"],
-            "answer": "Machine Learning"
+          "question": "What will be the output of print(2 ** 3)?",
+          "options": ["6", "8", "9", "None"],
+          "answer": "8",
+          "hint": "The '**' operator is used for exponentiation in Python."
         },
         {
-            "question": "Which of these is a popular machine learning library in Python?",
-            "options": ["pygame", "scikit-learn", "requests", "beautifulsoup"],
-            "answer": "scikit-learn"
+          "question": "Which data type is mutable in Python?",
+          "options": ["String", "Tuple", "List", "Integer"],
+          "answer": "List",
+          "hint": "Look for the data structure that allows modification after creation."
         },
         {
-            "question": "What is the process of finding patterns in data?",
-            "options": ["Data visualization", "Data cleaning", "Machine learning", "Data storage"],
-            "answer": "Machine learning"
+          "question": "How do you create a variable with the value 5 in Python?",
+          "options": ["x = 5", "int x = 5", "var x = 5", "x := 5"],
+          "answer": "x = 5",
+          "hint": "Python does not require specifying data types when declaring variables."
         },
         {
-            "question": "What is 'training' a machine learning model?",
-            "options": ["The process of running the code", "The process of making the model predict", "The process of showing the model data to learn from", "The process of deploying the model"],
-            "answer": "The process of showing the model data to learn from"
+          "question": "What does the len() function do?",
+          "options": ["Returns the length of an object", "Converts a string to lowercase", "Returns a random number", "Checks if an item exists in a list"],
+          "answer": "Returns the length of an object",
+          "hint": "It's commonly used with strings and lists to count items or characters."
         },
         {
-            "question": "Which type of machine learning is where we teach a model with labeled data?",
-            "options": ["Unsupervised Learning", "Reinforcement Learning", "Supervised Learning", "Deep Learning"],
-            "answer": "Supervised Learning"
+          "question": "What is the output of print(type(5))?",
+          "options": ["<class 'int'>", "<type 'int'>", "integer", "int"],
+          "answer": "<class 'int'>",
+          "hint": "Python's type() function provides the class of the object."
         },
         {
-            "question": "In supervised learning, what are 'labels'?",
-            "options": ["The input data", "The predicted output", "The known output for input data", "The model's parameters"],
-            "answer": "The known output for input data"
+          "question": "What is the purpose of the pass statement in Python?",
+          "options": ["Terminates the program", "Does nothing and allows the program to continue", "Skips the current iteration", "Defines a new class"],
+          "answer": "Does nothing and allows the program to continue",
+          "hint": "This statement is useful as a placeholder in loops or functions."
         },
         {
-            "question": "Which of the following is a basic step in a machine learning project?",
-            "options": ["Uploading videos to YouTube", "Data collection and cleaning", "Ignoring the dataset", "Only using pre-built models"],
-            "answer": "Data collection and cleaning"
+          "question": "Which of these is the correct syntax to import a module in Python?",
+          "options": ["import module_name", "include module_name", "require module_name", "using module_name"],
+          "answer": "import module_name",
+          "hint": "Python uses a specific keyword to bring external code into a script."
         },
         {
-            "question": "What is an 'algorithm' in machine learning?",
-            "options": ["A specific dataset", "A set of instructions to solve a problem", "A way to organize data", "A measure of model accuracy"],
-            "answer": "A set of instructions to solve a problem"
+          "question": "What is the correct way to handle exceptions in Python?",
+          "options": ["try-except", "try-catch", "try-error", "try-handler"],
+          "answer": "try-except",
+          "hint": "Python uses 'try' to test and a specific word to handle exceptions."
         },
         {
-            "question": "What is a 'model' in the context of machine learning?",
-            "options": ["A type of computer", "A function that makes predictions", "A type of input data", "A way to store data"],
-            "answer": "A function that makes predictions"
+          "question": "How do you start a for loop in Python?",
+          "options": ["for x in y:", "for (x in y):", "foreach (x in y):", "for x of y:"],
+          "answer": "for x in y:",
+          "hint": "The syntax for iteration in Python uses 'in'."
         },
         {
-            "question": "Which of these is a common task in machine learning?",
-            "options": ["Writing a book", "Classifying images", "Cooking a meal", "Designing a building"],
-            "answer": "Classifying images"
+          "question": "What is the output of print(bool(0))?",
+          "options": ["True", "False", "None", "0"],
+          "answer": "False",
+          "hint": "Zero is considered a 'falsy' value in Python."
         },
         {
-            "question": "What is the purpose of a train-test split?",
-            "options": ["To format data as excel sheet", "To have separate dataset for model training and evaluation", "To confuse the model", "To avoid using the model"],
-            "answer": "To have separate dataset for model training and evaluation"
+          "question": "Which of the following is not a valid Python data type?",
+          "options": ["List", "Dictionary", "Array", "Set"],
+          "answer": "Array",
+          "hint": "Python has a similar structure but uses lists instead."
         },
         {
-            "question": "What is feature engineering?",
-            "options": ["Ignoring data", "Selecting or creating important input features", "Writing model algorithms", "Saving models"],
-            "answer": "Selecting or creating important input features"
+          "question": "How do you create an empty dictionary in Python?",
+          "options": ["dict = {}", "dict = []", "dict = ()", "dict = empty()"],
+          "answer": "dict = {}",
+          "hint": "Dictionaries use curly braces for their structure."
         },
         {
-            "question": "What does the 'fit' method in scikit-learn typically do?",
-            "options": ["Displays the results", "Trains the model on training data", "Plots the data", "Deletes the data"],
-            "answer": "Trains the model on training data"
+          "question": "Which of these methods adds an item to a list?",
+          "options": ["append()", "add()", "insert()", "extend()"],
+          "answer": "append()",
+          "hint": "It directly appends to the end of the list."
         },
-        {
-            "question": "What is 'prediction' in machine learning?",
-            "options": ["The accuracy of the model", "The input data", "The model's estimated output", "The way to fit model"],
-            "answer": "The model's estimated output"
-        },
-        {
-            "question": "What does 'import' do in python when you import a library?",
-            "options": ["Deletes a library", "Loads library functionality into the program", "Opens a new file", "Saves the code"],
-            "answer": "Loads library functionality into the program"
-        },
-        {
-            "question": "What is the primary purpose of 'matplotlib'?",
-            "options": ["Data analysis", "Data cleaning", "Data visualization", "Text processing"],
-            "answer": "Data visualization"
-        },
-        {
-            "question": "Which of these is an example of a simple classification algorithm?",
-            "options": ["Linear Regression", "Logistic Regression", "Clustering", "Dimensionality Reduction"],
-            "answer": "Logistic Regression"
-        },
-        {
-            "question": "What is a common performance metric for classification?",
-            "options": ["Mean Squared Error", "Accuracy", "R-squared", "Variance"],
-            "answer": "Accuracy"
-        }
-    ]
+        // {
+        //   "question": "What is the output of 'hello'.upper()?",
+        //   "options": ["HELLO", "hello", "Hello", "None"],
+        //   "answer": "HELLO",
+        //   "hint": "The function converts a string to uppercase."
+        // },
+        // {
+        //   "question": "What is the purpose of the 'return' statement in Python?",
+        //   "options": ["To exit a loop", "To return a value from a function", "To define a variable", "To continue a loop"],
+        //   "answer": "To return a value from a function",
+        //   "hint": "It is used within functions to send a value back to the caller."
+        // },
+        // {
+        //   "question": "Which keyword is used to define a class in Python?",
+        //   "options": ["class", "define", "struct", "object"],
+        //   "answer": "class",
+        //   "hint": "It’s the same as the word used in object-oriented programming."
+        // },
+        // {
+        //   "question": "What does the 'is' keyword check in Python?",
+        //   "options": ["If two variables are identical", "If two variables have the same value", "If two variables are equal", "If two variables have the same type"],
+        //   "answer": "If two variables are identical",
+        //   "hint": "'is' checks if two variables point to the same object."
+        // },
+        // {
+        //   "question": "What will be the output of print('Hello, World!'[7:12])?",
+        //   "options": ["World", "World!", "Hello", "lo, W"],
+        //   "answer": "World",
+        //   "hint": "Slicing in Python is inclusive of the start index and exclusive of the end index."
+        // }
+      ]
+      
     nextQuestion()
 }
 
@@ -187,6 +211,7 @@ function nextQuestion() {
         circle.style.animationDuration = `${time_per_question}s`
         countdownInterval = setInterval(timer, 1000);
         const question = questions_global[current_index];
+        document.getElementById("hint-text").textContent = "";
 
         // Set the question text
         document.getElementById("question-text").textContent = question.question;
@@ -202,6 +227,11 @@ function nextQuestion() {
 
     } else {
         alert("No more questions!");
+    }
+}
+function showHint(){
+    if (current_index < questions_global.length){
+        document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }
 

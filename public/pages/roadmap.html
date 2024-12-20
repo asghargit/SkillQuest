@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/roadmap.js" defer></script>
   <title>Skillquest Roadmap</title>
   <style>
     /* Background Animation */
@@ -67,68 +68,16 @@
     </ul>
   </div>
 
-  <!-- Roadmap -->
-  <div class="flex items-center justify-center h-screen">
+  <!-- Dynamic Roadmap Content -->
+  <div id="roadmap-container" class="flex items-center justify-center h-screen">
     <div class="space-y-8">
-      <!-- Roadmap Title -->
-      <h1 class="text-center text-3xl md:text-5xl font-bold text-yellow-400">Python Programing Roadmap</h1>
+      <!-- Dynamic Title -->
+      <h1 id="course-title" class="text-center text-3xl md:text-5xl font-bold text-yellow-400"></h1>
+      <!-- Dynamic Description -->
+      <p id="course-description" class="text-center text-lg md:text-xl"></p>
       <!-- Steps -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <!-- Step 1 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            1
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Introduction</p>
-        </button>
-        <!-- Connector -->
-        <div class="hidden sm:block w-20 h-1 bg-yellow-400"></div>
-        <!-- Step 2 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            2
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Assessment 1</p>
-        </button>
-        <!-- Connector -->
-        <div class="hidden sm:block w-20 h-1 bg-yellow-400"></div>
-        <!-- Step 3 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            3
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Quiz 1</p>
-        </button>
-        <!-- Connector -->
-        <div class="hidden sm:block w-20 h-1 bg-yellow-400"></div>
-        <!-- Step 4 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            4
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Assessment 2</p>
-        </button>
-        <!-- Connector -->
-        <div class="hidden sm:block w-20 h-1 bg-yellow-400"></div>
-        <!-- Step 5 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            5
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Quiz 2</p>
-        </button>
-        <!-- Connector -->
-        <div class="hidden sm:block w-20 h-1 bg-yellow-400"></div>
-        <!-- Step 6 -->
-        <button class="flex flex-col items-center focus:outline-none group">
-          <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-            6
-          </div>
-          <p class="mt-2 text-center group-hover:text-yellow-500 transition">Final Quiz</p>
-        </button>
-      </div>
+      <ul id="roadmap-steps" class="space-y-4 text-center"></ul>
     </div>
   </div>
-
 </body>
 </html>
