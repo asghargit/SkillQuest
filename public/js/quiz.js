@@ -234,5 +234,10 @@ function showHint(){
         document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }
+localStorage.setItem('finalScore', currentScore);
+localStorage.setItem('totalQuestions', totalQuestions);
+localStorage.setItem('correctAnswers', correctAnswers);
+localStorage.setItem('performanceData', JSON.stringify(performanceData));
+window.location.href = '../pages/results.html';
 
 

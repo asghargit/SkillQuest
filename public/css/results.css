@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Dark background */
+    color: #ffcc00; /* Yellow text */
+    overflow: hidden;
+}
+
+/* Results Container */
+.results-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.85); /* Semi-transparent black */
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.7); /* Yellow glow */
+}
+
+.results-container h1 {
+    margin-bottom: 20px;
+    color: #ffcc00;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.results-content p {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #fff; /* White text for contrast */
+}
+
+.results-content span {
+    color: #ffcc00; /* Highlight important info */
+}
+
+.performance-summary h2 {
+    margin-top: 20px;
+    color: #ffcc00;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ffcc00; /* Accent line */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.performance-summary ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.performance-summary li {
+    margin: 5px 0;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1); /* Subtle contrast background */
+    border-radius: 5px;
+    color: #fff; /* White text */
+}
+
+/* Buttons */
+.control-button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    color: #121212;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.control-button:hover {
+    background: #e6b800; /* Slightly darker yellow */
+    transform: scale(1.1); /* Subtle zoom */
+}
+
+.control-button:active {
+    background: #cc9900; /* Pressed state */
+    transform: scale(0.95);
+}
+
+/* Background Animation */
+.area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind everything */
+    overflow: hidden;
+    background: #121212; /* Dark background */
+}
+
+.area ul.circles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.area ul.circles li {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffcc00;
+    opacity: 0.15; /* Low visibility */
+    animation: move 20s linear infinite;
+}
+
+/* Animations for background */
+@keyframes move {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}

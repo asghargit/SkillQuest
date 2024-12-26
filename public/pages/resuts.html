@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="../css/results.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container">
+        <h1>Quiz Results</h1>
+        <div class="results-content">
+            <p>Well done, <span id="playerName">Player</span>!</p>
+            <p>Your final score is: <span id="finalScore">0</span> QuestTokens</p>
+            <p>You answered <span id="correctAnswers">0</span> out of <span id="totalQuestions">0</span> questions correctly!</p>
+        </div>
+        <div class="performance-chart">
+            <h2>Performance Analysis</h2>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        
+
+        <!-- Performance Summary -->
+        <div class="performance-summary">
+            <h2>Performance Summary</h2>
+            <ul id="performanceDetails">
+                <!-- Individual question results will populate here -->
+            </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="control-button" id="retryButton">Retry Quiz</button>
+            <button class="control-button" id="nextButton">Next Level</button>
+        </div>
+    </div>
+
+    <script src="../js/results.js"></script>
+</body>
+</html>
