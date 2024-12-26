@@ -159,19 +159,7 @@ function showHint(){
         document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }
-function cleanJson(rawJson) {
-  // Remove the json and the surrounding whitespace/newlines
-  const cleanedJson = rawJson.trim().replace(/^json/, '').replace(/```$/, '');
 
-  try {
-    // Parse the cleaned JSON string
-    const parsedData = JSON.parse(cleanedJson);
-    return parsedData;
-  } catch (error) {
-    console.error('Error parsing JSON:', error);
-    return null;
-  }
-}
 
 
 
