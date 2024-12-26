@@ -1,6 +1,10 @@
 const countdownTextEl = document.getElementById('countdown-text');
 const circle = document.getElementById('c2');
 const time_per_question = 45
+const GOOGLE_API_KEY="AIzaSyDN-IhHu2LE9NXM9dn2QUZJ2uOKohUGUTE"
+const urlParams = new URLSearchParams(window.location.search);
+const courseName = urlParams.get("course");
+const step = urlParams.get("step");
 
 let countdownInterval = null
 let timeLeft = null; // total time in seconds
@@ -36,169 +40,90 @@ document.getElementById('Hints').addEventListener('click', ()=>{
 })
 
 async function generateContent(apiKey, subject, level) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-    const payload = {
-        contents: [{
-            parts: [{ 'text': ```Write a list of MCQ questions and answers and a hint. There should be 10 questions in total. ${subject}. On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in json format as a list of questions. The question attribute is "question", "options" for options and "answer" for the answer, "hint" for the hint. Just the json format.``` }]
-        }]
-    };
+  const payload = {
+    contents: [
+      {
+        parts: [
+          {
+            text: `Write a list of MCQ questions and answers and a hint. There should be 10 questions in total. The subject is "${subject}". On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in JSON format as a list of questions. The question attributes should be "question", "options", "answer", and "hint".`
+          }
+        ]
+      }
+    ]
+  };
 
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error generating content:', error);
-        return null;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error generating content:", error);
+    return null;
+  }
 }
-
-// generateContent(GOOGLE_API_KEY, 'Machine Learning with Python', 1)
-//     .then(data => console.log(data))
-//     .catch(error => console.error(error));
-
 let current_index = 0;
 
-function loadQuestions() {
-    questions_global = [
-        {
-          "question": "What is the correct way to create a function in Python?",
-          "options": ["def function_name():", "function function_name():", "create function_name():", "function:function_name()"],
-          "answer": "def function_name():",
-          "hint": "Python uses 'def' to define functions."
-        },
-        {
-          "question": "Which of the following is used to insert a comment in Python?",
-          "options": ["//", "#", "/* */", "<!-- -->"],
-          "answer": "#",
-          "hint": "Comments in Python start with a special symbol used for sharp notes."
-        },
-        {
-          "question": "What will be the output of print(2 ** 3)?",
-          "options": ["6", "8", "9", "None"],
-          "answer": "8",
-          "hint": "The '**' operator is used for exponentiation in Python."
-        },
-        {
-          "question": "Which data type is mutable in Python?",
-          "options": ["String", "Tuple", "List", "Integer"],
-          "answer": "List",
-          "hint": "Look for the data structure that allows modification after creation."
-        },
-        {
-          "question": "How do you create a variable with the value 5 in Python?",
-          "options": ["x = 5", "int x = 5", "var x = 5", "x := 5"],
-          "answer": "x = 5",
-          "hint": "Python does not require specifying data types when declaring variables."
-        },
-        {
-          "question": "What does the len() function do?",
-          "options": ["Returns the length of an object", "Converts a string to lowercase", "Returns a random number", "Checks if an item exists in a list"],
-          "answer": "Returns the length of an object",
-          "hint": "It's commonly used with strings and lists to count items or characters."
-        },
-        {
-          "question": "What is the output of print(type(5))?",
-          "options": ["<class 'int'>", "<type 'int'>", "integer", "int"],
-          "answer": "<class 'int'>",
-          "hint": "Python's type() function provides the class of the object."
-        },
-        {
-          "question": "What is the purpose of the pass statement in Python?",
-          "options": ["Terminates the program", "Does nothing and allows the program to continue", "Skips the current iteration", "Defines a new class"],
-          "answer": "Does nothing and allows the program to continue",
-          "hint": "This statement is useful as a placeholder in loops or functions."
-        },
-        {
-          "question": "Which of these is the correct syntax to import a module in Python?",
-          "options": ["import module_name", "include module_name", "require module_name", "using module_name"],
-          "answer": "import module_name",
-          "hint": "Python uses a specific keyword to bring external code into a script."
-        },
-        {
-          "question": "What is the correct way to handle exceptions in Python?",
-          "options": ["try-except", "try-catch", "try-error", "try-handler"],
-          "answer": "try-except",
-          "hint": "Python uses 'try' to test and a specific word to handle exceptions."
-        },
-        {
-          "question": "How do you start a for loop in Python?",
-          "options": ["for x in y:", "for (x in y):", "foreach (x in y):", "for x of y:"],
-          "answer": "for x in y:",
-          "hint": "The syntax for iteration in Python uses 'in'."
-        },
-        {
-          "question": "What is the output of print(bool(0))?",
-          "options": ["True", "False", "None", "0"],
-          "answer": "False",
-          "hint": "Zero is considered a 'falsy' value in Python."
-        },
-        {
-          "question": "Which of the following is not a valid Python data type?",
-          "options": ["List", "Dictionary", "Array", "Set"],
-          "answer": "Array",
-          "hint": "Python has a similar structure but uses lists instead."
-        },
-        {
-          "question": "How do you create an empty dictionary in Python?",
-          "options": ["dict = {}", "dict = []", "dict = ()", "dict = empty()"],
-          "answer": "dict = {}",
-          "hint": "Dictionaries use curly braces for their structure."
-        },
-        {
-          "question": "Which of these methods adds an item to a list?",
-          "options": ["append()", "add()", "insert()", "extend()"],
-          "answer": "append()",
-          "hint": "It directly appends to the end of the list."
-        },
-        // {
-        //   "question": "What is the output of 'hello'.upper()?",
-        //   "options": ["HELLO", "hello", "Hello", "None"],
-        //   "answer": "HELLO",
-        //   "hint": "The function converts a string to uppercase."
-        // },
-        // {
-        //   "question": "What is the purpose of the 'return' statement in Python?",
-        //   "options": ["To exit a loop", "To return a value from a function", "To define a variable", "To continue a loop"],
-        //   "answer": "To return a value from a function",
-        //   "hint": "It is used within functions to send a value back to the caller."
-        // },
-        // {
-        //   "question": "Which keyword is used to define a class in Python?",
-        //   "options": ["class", "define", "struct", "object"],
-        //   "answer": "class",
-        //   "hint": "It’s the same as the word used in object-oriented programming."
-        // },
-        // {
-        //   "question": "What does the 'is' keyword check in Python?",
-        //   "options": ["If two variables are identical", "If two variables have the same value", "If two variables are equal", "If two variables have the same type"],
-        //   "answer": "If two variables are identical",
-        //   "hint": "'is' checks if two variables point to the same object."
-        // },
-        // {
-        //   "question": "What will be the output of print('Hello, World!'[7:12])?",
-        //   "options": ["World", "World!", "Hello", "lo, W"],
-        //   "answer": "World",
-        //   "hint": "Slicing in Python is inclusive of the start index and exclusive of the end index."
-        // }
-      ]
-      
-    nextQuestion()
+async function loadQuestions() {
+  try {
+    const data = await generateContent(GOOGLE_API_KEY, courseName, );
+
+    if (data && data.candidates && data.candidates[0].content) {
+      const rawText = data.candidates[0].content.parts[0].text;
+      let sanitizedText;
+      try {
+        // Remove backticks and trim the response
+          sanitizedText = rawText
+          .replace(/```json\s*/g, "")  // Remove leading ```json and any leading whitespace
+          .replace(/\s*```/g, "")      // Remove trailing backticks and any trailing whitespace
+          .trim();                    // Remove extra whitespace from the start and end
+
+        console.log("Sanitized Text:", sanitizedText); // Debugging log
+
+        // Parse the sanitized JSON
+        const parsedQuestions = JSON.parse(sanitizedText);
+
+        if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+          questions_global = parsedQuestions; // Save parsed questions
+          current_index = 0; // Reset the question index
+          nextQuestion(); // Load the first question
+        } else {
+          throw new Error("Parsed JSON is valid but doesn't contain questions.");
+        }
+      } catch (jsonError) {
+        console.error("Error parsing JSON from API:", jsonError);
+        console.error("Raw API Response:", rawText);
+        console.error("Sanitized API Response:", sanitizedText);
+        alert("Error parsing questions. Please check the console for details.");
+      }
+    } else {
+      console.error("No valid response received from API:", data);
+      alert("Error fetching questions. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error loading questions:", error);
+    alert("Error loading questions. Please check your API key or internet connection.");
+  }
 }
 
-loadQuestions()
+
+
+// Call loadQuestions to initiate question fetching
+loadQuestions();
+
+// Assuming you have a function nextQuestion that handles displaying the next question
 
 
 // Function to load the next question
@@ -234,5 +159,19 @@ function showHint(){
         document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }
+function cleanJson(rawJson) {
+  // Remove the json and the surrounding whitespace/newlines
+  const cleanedJson = rawJson.trim().replace(/^json/, '').replace(/```$/, '');
+
+  try {
+    // Parse the cleaned JSON string
+    const parsedData = JSON.parse(cleanedJson);
+    return parsedData;
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
+    return null;
+  }
+}
+
 
 

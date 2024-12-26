@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
    // Get DOM elements
+// Get DOM elements
 const courseTitle = document.getElementById("course-title");
 const courseDescription = document.getElementById("course-description");
 const roadmapSteps = document.getElementById("roadmap-steps");
@@ -105,6 +106,15 @@ const populateRoadmap = (course) => {
             </div>
             <p class="mt-2 text-center group-hover:text-yellow-500 transition">${step}</p>
         `;
+
+        // Add click event to redirect to quiz.html
+        button.addEventListener("click", () => {
+            // Construct URL with query parameters
+            const url = `quiz.html?course=${encodeURIComponent(course.title)}&step=${encodeURIComponent(step)}`;
+            // Redirect to quiz.html
+            window.location.href = url;
+        });
+
         roadmapSteps.appendChild(button);
     });
 
@@ -121,4 +131,5 @@ if (courseName && courseData[courseName]) {
         "<p class='text-center text-yellow-400'>Course not found. Please go back and select a valid course.</p>";
     roadmapContainer.style.display = "flex";
 }
+
 });
