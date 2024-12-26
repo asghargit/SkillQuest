@@ -80,43 +80,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Get DOM elements
-    const courseTitle = document.getElementById("course-title");
-    const courseDescription = document.getElementById("course-description");
-    const roadmapSteps = document.getElementById("roadmap-steps");
-    const roadmapContainer = document.getElementById("roadmap-container");
+   // Get DOM elements
+const courseTitle = document.getElementById("course-title");
+const courseDescription = document.getElementById("course-description");
+const roadmapSteps = document.getElementById("roadmap-steps");
+const roadmapContainer = document.getElementById("roadmap-container");
 
-    // Function to populate the roadmap content
-    const populateRoadmap = (course) => {
-        // Update title and description
-        courseTitle.textContent = course.title;
-        courseDescription.textContent = course.description;
+// Function to populate the roadmap content
+const populateRoadmap = (course) => {
+    // Update title and description
+    courseTitle.textContent = course.title;
+    courseDescription.textContent = course.description;
 
-        // Clear previous steps and add new ones
-        roadmapSteps.innerHTML = "";
-        course.steps.forEach((step, index) => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-                <div class="flex flex-col items-center focus:outline-none group">
-                    <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
-                        ${index + 1}
-                    </div>
-                    <p class="mt-2 text-center group-hover:text-yellow-500 transition">${step}</p>
-                </div>
-            `;
-            roadmapSteps.appendChild(li);
-        });
+    // Clear previous steps and add new ones
+    roadmapSteps.innerHTML = "";
+    course.steps.forEach((step, index) => {
+        const button = document.createElement("button");
+        button.setAttribute("type", "button"); // Ensure it's a button
+        button.className =
+            "flex flex-col items-center focus:outline-none group transition-all";
+        button.innerHTML = `
+            <div class="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center text-lg font-bold group-hover:bg-yellow-500 transition">
+                ${index + 1}
+            </div>
+            <p class="mt-2 text-center group-hover:text-yellow-500 transition">${step}</p>
+        `;
+        roadmapSteps.appendChild(button);
+    });
 
-        // Ensure roadmap container is visible
-        roadmapContainer.style.display = "flex";
-    };
+    // Ensure roadmap container is visible
+    roadmapContainer.style.display = "flex";
+};
 
-    // Check if the course name is valid
-    if (courseName && courseData[courseName]) {
-        populateRoadmap(courseData[courseName]);
-    } else {
-        // Fallback if the course is not found
-        roadmapContainer.innerHTML = "<p class='text-center text-yellow-400'>Course not found. Please go back and select a valid course.</p>";
-        roadmapContainer.style.display = "flex";
-    }
+// Check if the course name is valid
+if (courseName && courseData[courseName]) {
+    populateRoadmap(courseData[courseName]);
+} else {
+    // Fallback if the course is not found
+    roadmapContainer.innerHTML =
+        "<p class='text-center text-yellow-400'>Course not found. Please go back and select a valid course.</p>";
+    roadmapContainer.style.display = "flex";
+}
 });
