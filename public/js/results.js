@@ -4,13 +4,14 @@ document.getElementById('retryButton').addEventListener('click', function () {
     window.location.href = '../pages/quiz.html';
 });
 
-document.getElementById('homeButton').addEventListener('click', function () {
-    // Redirect to the home page
-    window.location.href = '../pages/home.html';
-});
+// document.getElementById('homeButton').addEventListener('click', function () {
+//     // Redirect to the home page
+//     window.location.href = '../pages/home.html';
+// });
 
 // Load and display results from localStorage
 window.onload = function () {
+    console.log(132492803);
     // Fetch data from localStorage
     const playerName = localStorage.getItem('playerName') || 'Player';
     const finalScore = parseInt(localStorage.getItem('finalScore')) || 0;
