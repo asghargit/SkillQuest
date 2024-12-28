@@ -5,6 +5,7 @@ const GOOGLE_API_KEY="AIzaSyDN-IhHu2LE9NXM9dn2QUZJ2uOKohUGUTE"
 const urlParams = new URLSearchParams(window.location.search);
 const courseName = urlParams.get("course");
 const step = urlParams.get("step");
+const answers = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 let countdownInterval = null
 let timeLeft = null; // total time in seconds
@@ -39,6 +40,22 @@ document.getElementById('Hints').addEventListener('click', ()=>{
     showHint(questions_global)
 })
 
+document.getElementById('optionA').addEventListener('click', ()=>{
+  answers[current_index-1] = 0;
+})
+
+document.getElementById('optionB').addEventListener('click', ()=>{
+  answers[current_index-1] = 1;
+})
+
+document.getElementById('optionC').addEventListener('click', ()=>{
+  answers[current_index-1] = 2;
+})
+
+document.getElementById('optionD').addEventListener('click', ()=>{
+  answers[current_index-1] = 3;
+})
+
 async function generateContent(apiKey, subject, level) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
@@ -47,7 +64,7 @@ async function generateContent(apiKey, subject, level) {
       {
         parts: [
           {
-            text: `Write a list of MCQ questions and answers and a hint. There should be 10 questions in total. The subject is "${subject}". On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in JSON format as a list of questions. The question attributes should be "question", "options", "answer", and "hint".`
+            text: `Write a list of MCQ questions and answers and a hint. There should be 10 questions in total. The subject is "${subject}". On a scale of difficulty out of 5, the difficulty should be ${level}. Respond in JSON format as a list of questions. The question attributes should be "question", "options" as a list, "answer" as the index of the list, and "hint".`
           }
         ]
       }
@@ -68,6 +85,7 @@ async function generateContent(apiKey, subject, level) {
     }
 
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.error("Error generating content:", error);
@@ -77,6 +95,126 @@ async function generateContent(apiKey, subject, level) {
 let current_index = 0;
 
 async function loadQuestions() {
+
+
+  // questions_global = [
+  //   {
+  //     "question": "Which of the following is an example of supervised learning?",
+  //     "options": [
+  //       "Clustering customer data",
+  //       "Predicting house prices based on features",
+  //       "Finding patterns in unlabelled data",
+  //       "Generating new data points"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Supervised learning involves labeled data."
+  //   },
+  //   {
+  //     "question": "What does the term 'overfitting' refer to in machine learning?",
+  //     "options": [
+  //       "A model performing well on training data but poorly on unseen data",
+  //       "A model that underperforms on training data",
+  //       "A model with too few parameters",
+  //       "A model with too much regularization"
+  //     ],
+  //     "answer": 0,
+  //     "hint": "Overfitting occurs when the model is too complex and memorizes the training data."
+  //   },
+  //   {
+  //     "question": "Which of these algorithms is commonly used for classification problems?",
+  //     "options": [
+  //       "Linear Regression",
+  //       "K-Nearest Neighbors (KNN)",
+  //       "K-Means Clustering",
+  //       "Principal Component Analysis (PCA)"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Classification problems often involve predicting categories."
+  //   },
+  //   {
+  //     "question": "What is the purpose of a validation dataset?",
+  //     "options": [
+  //       "To train the model",
+  //       "To test the model on unseen data",
+  //       "To fine-tune hyperparameters",
+  //       "To generate predictions"
+  //     ],
+  //     "answer": 2,
+  //     "hint": "Validation data helps optimize the model without testing it."
+  //   },
+  //   {
+  //     "question": "Which metric is most appropriate for evaluating a regression model?",
+  //     "options": [
+  //       "Accuracy",
+  //       "Precision",
+  //       "Mean Squared Error (MSE)",
+  //       "Confusion Matrix"
+  //     ],
+  //     "answer": 2,
+  //     "hint": "Regression models require metrics that measure prediction errors."
+  //   },
+  //   {
+  //     "question": "What is the purpose of regularization in machine learning?",
+  //     "options": [
+  //       "To increase the model's complexity",
+  //       "To reduce overfitting",
+  //       "To improve training speed",
+  //       "To evaluate the model"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Regularization discourages the model from relying too much on specific features."
+  //   },
+  //   {
+  //     "question": "Which of the following is NOT a type of neural network?",
+  //     "options": [
+  //       "Convolutional Neural Network (CNN)",
+  //       "Recurrent Neural Network (RNN)",
+  //       "Bayesian Neural Network",
+  //       "Decision Tree Neural Network"
+  //     ],
+  //     "answer": 3,
+  //     "hint": "Neural networks typically don't use tree structures."
+  //   },
+  //   {
+  //     "question": "What does a confusion matrix measure?",
+  //     "options": [
+  //       "The accuracy of a regression model",
+  //       "The number of correct and incorrect predictions for classification",
+  //       "The loss during training",
+  //       "The similarity between clusters"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "A confusion matrix is a table used for classification evaluations."
+  //   },
+  //   {
+  //     "question": "Which of these techniques can be used to handle missing data?",
+  //     "options": [
+  //       "Drop rows with missing values",
+  //       "Replace missing values with the mean or median",
+  //       "Use algorithms that support missing values",
+  //       "All of the above"
+  //     ],
+  //     "answer": 3,
+  //     "hint": "There are multiple ways to deal with missing data."
+  //   },
+  //   {
+  //     "question": "Which activation function is commonly used in the output layer for binary classification?",
+  //     "options": [
+  //       "ReLU",
+  //       "Sigmoid",
+  //       "Tanh",
+  //       "Softmax"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Binary classification outputs probabilities between 0 and 1."
+  //   }
+  // ]
+
+  // nextQuestion(); // Load the first question
+
+
+  // return;
+
   try {
     const data = await generateContent(GOOGLE_API_KEY, courseName, );
 
@@ -94,8 +232,11 @@ async function loadQuestions() {
 
         // Parse the sanitized JSON
         const parsedQuestions = JSON.parse(sanitizedText);
+        document.getElementById('loading').style.display = 'none';
+        document.querySelector('.quiz-container').style.display = 'block';
 
         if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+          console.log(parsedQuestions);
           questions_global = parsedQuestions; // Save parsed questions
           current_index = 0; // Reset the question index
           nextQuestion(); // Load the first question
@@ -128,37 +269,61 @@ loadQuestions();
 
 // Function to load the next question
 function nextQuestion() {
-    if (current_index < questions_global.length) {
-        clearInterval(countdownInterval)
-        timeLeft = time_per_question
-        countdownTextEl.textContent = time_per_question;
-        circle.style.animationDuration = `0s`
-        circle.style.animationDuration = `${time_per_question}s`
-        countdownInterval = setInterval(timer, 1000);
-        const question = questions_global[current_index];
-        document.getElementById("hint-text").textContent = "";
+  if (current_index < questions_global.length) {
+      clearInterval(countdownInterval);
+      timeLeft = time_per_question;
+      countdownTextEl.textContent = time_per_question;
+      circle.style.animationDuration = `${time_per_question}s`;
+      countdownInterval = setInterval(timer, 1000);
 
-        // Set the question text
-        document.getElementById("question-text").textContent = question.question;
+      const question = questions_global[current_index];
+      document.getElementById("hint-text").textContent = "";
 
-        // Set the options
-        const options = document.querySelectorAll(".option-button");
-        options.forEach((button, index) => {
-            button.textContent = `${String.fromCharCode(65 + index)}: ${question.options[index]}`;
-        });
+      // Set the question text
+      document.getElementById("question-text").textContent = question.question;
 
-        // Increment the current index for the next question
-        current_index++;
+      // Set the options
+      const options = document.querySelectorAll(".option-button");
+      options.forEach((button, index) => {
+          button.textContent = `${String.fromCharCode(65 + index)}: ${question.options[index]}`;
+      });
 
-    } else {
-        alert("No more questions!");
-    }
+      // Increment the current index for the next question
+      current_index++;
+  } else {
+
+    let correct = 0
+    console.log(answers);
+    performanceData = []
+      for(let i = 0; i<10; i++){
+        performanceData.push({
+          correct: answers[i] == questions_global[i].answer
+        })
+        if(answers[i] == questions_global[i].answer){
+          correct += 1
+        }
+      }
+
+      console.log(performanceData);
+
+
+      localStorage.setItem('finalScore', correct);
+      localStorage.setItem('totalQuestions', 10);
+      localStorage.setItem('correctAnswers', correct);
+      localStorage.setItem('performanceData', JSON.stringify(performanceData));
+
+      // Redirect to the results page when all questions are completed
+      window.location.href = `/public/pages/results.html`; // Adjust for your server setup
+
+  }
 }
+
 function showHint(){
     if (current_index < questions_global.length){
         document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }
+// window.location.href = '../pages/results.html';
 
 
 
