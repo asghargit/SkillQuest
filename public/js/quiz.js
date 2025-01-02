@@ -1,7 +1,7 @@
 const countdownTextEl = document.getElementById('countdown-text');
 const circle = document.getElementById('c2');
 const time_per_question = 45
-const GOOGLE_API_KEY="AIzaSyDN-IhHu2LE9NXM9dn2QUZJ2uOKohUGUTE"
+const GOOGLE_API_KEY="AIzaSyDlfmn5W5RQeAUPsYfbDrDcVvHnx6qlCUE"
 const urlParams = new URLSearchParams(window.location.search);
 const courseName = urlParams.get("course");
 const step = urlParams.get("step");
@@ -269,6 +269,7 @@ loadQuestions();
 
 // Function to load the next question
 function nextQuestion() {
+  
   if (current_index < questions_global.length) {
       clearInterval(countdownInterval);
       timeLeft = time_per_question;
@@ -282,12 +283,14 @@ function nextQuestion() {
       // Set the question text
       document.getElementById("question-text").textContent = question.question;
 
+      document.getElementById("hint-text").style.display = "none";
+
       // Set the options
       const options = document.querySelectorAll(".option-button");
       options.forEach((button, index) => {
           button.textContent = `${String.fromCharCode(65 + index)}: ${question.options[index]}`;
       });
-
+     
       // Increment the current index for the next question
       current_index++;
   } else {
@@ -320,6 +323,7 @@ function nextQuestion() {
 
 function showHint(){
     if (current_index < questions_global.length){
+        document.getElementById("hint-text").style.display = "block";
         document.getElementById("hint-text").textContent = questions_global[current_index].hint;
     }
 }

@@ -428,5 +428,18 @@ svg text {
         padding: 8px 12px; /* Compact padding */
     }
 }
+/* Hint styling */
+#hint-text {
+    display: none; /* Initially hidden */
+    background-color: #fff8dc; /* Light yellow background (cornsilk) */
+    border: 2px solid #ffd700; /* Golden border */
+    color: #333; /* Dark gray text for good readability */
+    padding: 10px; /* Space inside the div */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Standard font size */
+    font-family: Arial, sans-serif; /* Simple font family */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
 
 
