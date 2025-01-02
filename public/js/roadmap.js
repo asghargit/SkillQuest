@@ -109,9 +109,11 @@ const populateRoadmap = (course) => {
 
         // Add click event to redirect to quiz.html
         button.addEventListener("click", () => {
+            localStorage.setItem("step", step);
+            localStorage.setItem("course_tit", course.title);
             // Construct URL with query parameters
             const url = `quiz.html?course=${encodeURIComponent(course.title)}&step=${encodeURIComponent(step)}`;
-            // Redirect to quiz.html
+            // Redirect to quiz.html    
             window.location.href = url;
         });
 

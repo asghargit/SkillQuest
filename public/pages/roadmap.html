@@ -48,6 +48,45 @@
       0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
       100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
     }
+
+    /* Center roadmap content vertically and horizontally */
+    #roadmap-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh; /* Full screen height */
+    }
+
+    /* Style roadmap steps in a horizontal line */
+    #roadmap-steps {
+      display: flex; /* Align items horizontally */
+      justify-content: space-evenly; /* Evenly space the steps */
+      list-style: none; /* Remove default bullet points */
+      padding: 0; /* Remove default padding */
+      position: relative;
+    }
+
+    #roadmap-steps li {
+      text-align: center; /* Center-align each step's text */
+      max-width: 200px; /* Set a max width for readability */
+      color: #fff; /* Keep text white */
+      background-color: rgba(255, 255, 0, 0.1); /* Add a subtle yellow background */
+      padding: 1rem; /* Add padding for better spacing */
+      border-radius: 8px; /* Round the corners */
+      border: 1px solid rgba(255, 255, 0, 0.3); /* Add a border */
+      position: relative;
+    }
+
+    /* SVG Pipes (lines) */
+    .pipe {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255, 255, 0, 0.3); /* Yellow pipe */
+      z-index: -1;
+    }
   </style>
 </head>
 <body class="text-white font-sans">
@@ -69,14 +108,22 @@
   </div>
 
   <!-- Dynamic Roadmap Content -->
-  <div id="roadmap-container" class="flex items-center justify-center h-screen">
-    <div class="space-y-8">
+  <div id="roadmap-container">
+    <div class="space-y-8 text-center">
       <!-- Dynamic Title -->
-      <h1 id="course-title" class="text-center text-3xl md:text-5xl font-bold text-yellow-400"></h1>
+      <h1 id="course-title" class="text-3xl md:text-5xl font-bold text-yellow-400"></h1>
       <!-- Dynamic Description -->
-      <p id="course-description" class="text-center text-lg md:text-xl"></p>
+      <p id="course-description" class="text-lg md:text-xl"></p>
       <!-- Steps -->
-      <ul id="roadmap-steps" class="space-y-4 text-center"></ul>
+      <ul id="roadmap-steps">
+        <li>Step 1: Introduction</li>
+        <li>Step 2: Basics</li>
+        <li>Step 3: Intermediate</li>
+        <li>Step 4: Advanced Topics</li>
+        <li>Step 5: Conclusion</li>
+        <!-- SVG pipes between each step -->
+        <div class="pipe" style="left: calc(100% / 5);"></div>
+      </ul>
     </div>
   </div>
 </body>

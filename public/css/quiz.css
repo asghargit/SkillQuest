@@ -244,6 +244,7 @@ svg text {
     }
 }
 
+
 /* Background Animation */
 .area {
     background: #000000; /* Black background */
@@ -405,7 +406,6 @@ svg text {
     transform: scale(0.98); /* Slight shrink effect */
 }
 
-/* Points Remaining Tab */
 /* Points Remaining Tab */
 .points-remaining {
     position: absolute;

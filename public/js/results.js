@@ -90,3 +90,38 @@ function renderPerformanceGraph(performanceData) {
         }
     });
 }
+
+// next_level = document.getElementById('nextButton').addEventListener("click", () => {
+//     var step = localStorage.getItem("step");
+//     var course_tit = localStorage.getItem("course_tit");
+//     console.log(step);
+//     // Construct URL with query parameters
+//     const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
+//     // Redirect to quiz.html    
+//     window.location.href = url;
+// });
+// Assuming the score is stored in localStorage with the key "quizScore"
+document.addEventListener("DOMContentLoaded", () => {
+    const nextButton = document.getElementById('nextButton');
+    const score = parseInt(localStorage.getItem("finalScore"), 10); // Retrieve the stored score
+
+    // Check if the score is above 6/10
+    if (score > 6) {
+        nextButton.style.display = "block"; // Show the button if score > 6
+    } else {
+        nextButton.style.display = "none"; // Hide the button otherwise
+    }
+
+    // Add event listener to the button
+    nextButton.addEventListener("click", () => {
+        const level = localStorage.getItem("level");
+        const course_tit = localStorage.getItem("course_tit");
+        console.log(level); 
+        level = Number(level)+1;
+
+        // Construct URL with query parameters
+        const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent()}`;
+        // Redirect to quiz.html    
+        window.location.href = url;
+    });
+});

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../css/homescreen.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- Firebase Configuration and Firebase SDK -->
+    <script src="../../src/utils/firebaseConfig.js" type="module"></script>
     <style>
         /* Styling for the robot emoji */
         .emoji {
@@ -135,6 +137,7 @@
         onAuthStateChanged(auth, (user) => {
           if (user) {
             console.log('User is signed in:', user);
+            
           } else {
             window.location.href = 'login.html';
           }

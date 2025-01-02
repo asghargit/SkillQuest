@@ -9,7 +9,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyAvU4KgNb8AwfY8opu64uCt0TufHMWxc2I",
     authDomain: "skillquest-c2f7c.firebaseapp.com",
     projectId: "skillquest-c2f7c",
-    storageBucket: "skillquest-c2f7c.firebasestorage.app",
+    storageBucket: "skillquest-c2f7c.appspot.com",
     messagingSenderId: "758210440189",
     appId: "1:758210440189:web:92a9223675c7131b150794",
     measurementId: "G-YD6H5LQB6B"

@@ -29,7 +29,7 @@ export async function register() {
         const userData = {
             email: email,
             userName: userName,
-            points : 0,
+            points : 500,
             courses: {},
             lastLogin: Date.now()
         };
