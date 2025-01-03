@@ -12,6 +12,8 @@ let countdownInterval = null
 let timeLeft = time_per_question; // total time in seconds
 const userUid = localStorage.getItem("userUid");  // Get the user UID from localStorage
 let level = null;
+console.log(step);
+
 switch (step) {
   case "Introduction":
       level = 1;
@@ -42,6 +44,7 @@ switch (step) {
       // Add logic for invalid options if necessary
 }
 localStorage.setItem("level",level);
+console.log(level);
 // Assuming this code is inside an async function
 // async function fetchCurrentPoints() {
   
