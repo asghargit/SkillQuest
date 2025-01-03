@@ -204,7 +204,6 @@ svg circle#c2 {
     stroke-dasharray: 113px;
     stroke-dashoffset: 0px;
     stroke: #198051;
-    animation: countdown 45s linear forwards;
 }
 
 svg circle#c3 {

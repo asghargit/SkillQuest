@@ -1,7 +1,7 @@
 import { getPoints, updatePoints } from "../js/points.js";
 
 const countdownTextEl = document.getElementById('countdown-text');
-const circle = document.getElementById('c2');
+const circle = document.getElementById('countdown');
 const time_per_question = 45;
 const GOOGLE_API_KEY="AIzaSyDlfmn5W5RQeAUPsYfbDrDcVvHnx6qlCUE";
 const urlParams = new URLSearchParams(window.location.search);
@@ -60,21 +60,23 @@ console.log(level);
 updatePointsDisplay();
 // Example of calling the function to get points
 function timer(){
-    timeLeft--;
-    countdownTextEl.textContent = timeLeft;
+    timeLeft-=0.1;
+    countdownTextEl.textContent = Math.round(timeLeft);
 
+    let color;
     // Change color based on remaining time
     if (timeLeft <= 15) {
-        circle.style.stroke = '#ff0000'; // Red for last 15 seconds
-
+      color = '#ff0000'; // Red for last 15 seconds
+      
     } else if (timeLeft <= 30) {
-        circle.style.stroke = '#ffa500'; // Yellow from 30 to 15 seconds
-
+      color = '#ffa500'; // Yellow from 30 to 15 seconds
+      
     } else {
-        circle.style.stroke = '#198051'; // Green for the initial 30 seconds
-
+      color = '#198051'; // Green for the initial 30 seconds
+      
     }
-
+    circle.style.background = `conic-gradient(${color} ${ timeLeft * 8 }deg,${ '#FFF'} 0deg)`;
+    
     if (timeLeft <= 0) {
         nextQuestion()
     }
@@ -146,123 +148,126 @@ let current_index = 0;
 async function loadQuestions() {
 
 
-  // questions_global = [
-  //   {
-  //     "question": "Which of the following is an example of supervised learning?",
-  //     "options": [
-  //       "Clustering customer data",
-  //       "Predicting house prices based on features",
-  //       "Finding patterns in unlabelled data",
-  //       "Generating new data points"
-  //     ],
-  //     "answer": 1,
-  //     "hint": "Supervised learning involves labeled data."
-  //   },
-  //   {
-  //     "question": "What does the term 'overfitting' refer to in machine learning?",
-  //     "options": [
-  //       "A model performing well on training data but poorly on unseen data",
-  //       "A model that underperforms on training data",
-  //       "A model with too few parameters",
-  //       "A model with too much regularization"
-  //     ],
-  //     "answer": 0,
-  //     "hint": "Overfitting occurs when the model is too complex and memorizes the training data."
-  //   },
-  //   {
-  //     "question": "Which of these algorithms is commonly used for classification problems?",
-  //     "options": [
-  //       "Linear Regression",
-  //       "K-Nearest Neighbors (KNN)",
-  //       "K-Means Clustering",
-  //       "Principal Component Analysis (PCA)"
-  //     ],
-  //     "answer": 1,
-  //     "hint": "Classification problems often involve predicting categories."
-  //   },
-  //   {
-  //     "question": "What is the purpose of a validation dataset?",
-  //     "options": [
-  //       "To train the model",
-  //       "To test the model on unseen data",
-  //       "To fine-tune hyperparameters",
-  //       "To generate predictions"
-  //     ],
-  //     "answer": 2,
-  //     "hint": "Validation data helps optimize the model without testing it."
-  //   },
-  //   {
-  //     "question": "Which metric is most appropriate for evaluating a regression model?",
-  //     "options": [
-  //       "Accuracy",
-  //       "Precision",
-  //       "Mean Squared Error (MSE)",
-  //       "Confusion Matrix"
-  //     ],
-  //     "answer": 2,
-  //     "hint": "Regression models require metrics that measure prediction errors."
-  //   },
-  //   {
-  //     "question": "What is the purpose of regularization in machine learning?",
-  //     "options": [
-  //       "To increase the model's complexity",
-  //       "To reduce overfitting",
-  //       "To improve training speed",
-  //       "To evaluate the model"
-  //     ],
-  //     "answer": 1,
-  //     "hint": "Regularization discourages the model from relying too much on specific features."
-  //   },
-  //   {
-  //     "question": "Which of the following is NOT a type of neural network?",
-  //     "options": [
-  //       "Convolutional Neural Network (CNN)",
-  //       "Recurrent Neural Network (RNN)",
-  //       "Bayesian Neural Network",
-  //       "Decision Tree Neural Network"
-  //     ],
-  //     "answer": 3,
-  //     "hint": "Neural networks typically don't use tree structures."
-  //   },
-  //   {
-  //     "question": "What does a confusion matrix measure?",
-  //     "options": [
-  //       "The accuracy of a regression model",
-  //       "The number of correct and incorrect predictions for classification",
-  //       "The loss during training",
-  //       "The similarity between clusters"
-  //     ],
-  //     "answer": 1,
-  //     "hint": "A confusion matrix is a table used for classification evaluations."
-  //   },
-  //   {
-  //     "question": "Which of these techniques can be used to handle missing data?",
-  //     "options": [
-  //       "Drop rows with missing values",
-  //       "Replace missing values with the mean or median",
-  //       "Use algorithms that support missing values",
-  //       "All of the above"
-  //     ],
-  //     "answer": 3,
-  //     "hint": "There are multiple ways to deal with missing data."
-  //   },
-  //   {
-  //     "question": "Which activation function is commonly used in the output layer for binary classification?",
-  //     "options": [
-  //       "ReLU",
-  //       "Sigmoid",
-  //       "Tanh",
-  //       "Softmax"
-  //     ],
-  //     "answer": 1,
-  //     "hint": "Binary classification outputs probabilities between 0 and 1."
-  //   }
-  // ]
+  questions_global = [
+    {
+      "question": "Which of the following is an example of supervised learning?",
+      "options": [
+        "Clustering customer data",
+        "Predicting house prices based on features",
+        "Finding patterns in unlabelled data",
+        "Generating new data points"
+      ],
+      "answer": 1,
+      "hint": "Supervised learning involves labeled data."
+    },
+    {
+      "question": "What does the term 'overfitting' refer to in machine learning?",
+      "options": [
+        "A model performing well on training data but poorly on unseen data",
+        "A model that underperforms on training data",
+        "A model with too few parameters",
+        "A model with too much regularization"
+      ],
+      "answer": 0,
+      "hint": "Overfitting occurs when the model is too complex and memorizes the training data."
+    },
+    {
+      "question": "Which of these algorithms is commonly used for classification problems?",
+      "options": [
+        "Linear Regression",
+        "K-Nearest Neighbors (KNN)",
+        "K-Means Clustering",
+        "Principal Component Analysis (PCA)"
+      ],
+      "answer": 1,
+      "hint": "Classification problems often involve predicting categories."
+    },
+    {
+      "question": "What is the purpose of a validation dataset?",
+      "options": [
+        "To train the model",
+        "To test the model on unseen data",
+        "To fine-tune hyperparameters",
+        "To generate predictions"
+      ],
+      "answer": 2,
+      "hint": "Validation data helps optimize the model without testing it."
+    },
+    {
+      "question": "Which metric is most appropriate for evaluating a regression model?",
+      "options": [
+        "Accuracy",
+        "Precision",
+        "Mean Squared Error (MSE)",
+        "Confusion Matrix"
+      ],
+      "answer": 2,
+      "hint": "Regression models require metrics that measure prediction errors."
+    },
+    {
+      "question": "What is the purpose of regularization in machine learning?",
+      "options": [
+        "To increase the model's complexity",
+        "To reduce overfitting",
+        "To improve training speed",
+        "To evaluate the model"
+      ],
+      "answer": 1,
+      "hint": "Regularization discourages the model from relying too much on specific features."
+    },
+    {
+      "question": "Which of the following is NOT a type of neural network?",
+      "options": [
+        "Convolutional Neural Network (CNN)",
+        "Recurrent Neural Network (RNN)",
+        "Bayesian Neural Network",
+        "Decision Tree Neural Network"
+      ],
+      "answer": 3,
+      "hint": "Neural networks typically don't use tree structures."
+    },
+    {
+      "question": "What does a confusion matrix measure?",
+      "options": [
+        "The accuracy of a regression model",
+        "The number of correct and incorrect predictions for classification",
+        "The loss during training",
+        "The similarity between clusters"
+      ],
+      "answer": 1,
+      "hint": "A confusion matrix is a table used for classification evaluations."
+    },
+    {
+      "question": "Which of these techniques can be used to handle missing data?",
+      "options": [
+        "Drop rows with missing values",
+        "Replace missing values with the mean or median",
+        "Use algorithms that support missing values",
+        "All of the above"
+      ],
+      "answer": 3,
+      "hint": "There are multiple ways to deal with missing data."
+    },
+    {
+      "question": "Which activation function is commonly used in the output layer for binary classification?",
+      "options": [
+        "ReLU",
+        "Sigmoid",
+        "Tanh",
+        "Softmax"
+      ],
+      "answer": 1,
+      "hint": "Binary classification outputs probabilities between 0 and 1."
+    }
+  ]
 
-  // nextQuestion(); // Load the first question
+  current_index = 0;
+  document.getElementById('loading').style.display = 'none';
+  document.querySelector('.quiz-container').style.display = 'block';
+  nextQuestion(); // Load the first question
 
 
-  // return;
+  return;
 
   try {
     const data = await generateContent(GOOGLE_API_KEY, courseName, level);
@@ -319,6 +324,7 @@ loadQuestions();
 // Function to load the next question
 async function nextQuestion() {
   // Updating points when answered within 15 secs 
+  circle.style.background = `conic-gradient(${'#198051'} ${ 360 }deg,${ '#FFF'} 0deg)`;
   if(current_index>0 && current_index<10){
   if(timeLeft>=30){
     let curr_points = await getPoints(userUid);
@@ -337,8 +343,7 @@ async function nextQuestion() {
       clearInterval(countdownInterval);
       timeLeft = time_per_question;
       countdownTextEl.textContent = time_per_question;
-      circle.style.animationDuration = `${time_per_question}s`;
-      countdownInterval = setInterval(timer, 1000);
+      countdownInterval = setInterval(timer, 100);
 
       const question = questions_global[current_index];
       document.getElementById("hint-text").textContent = "";
