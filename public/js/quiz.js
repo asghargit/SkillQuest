@@ -148,126 +148,126 @@ let current_index = 0;
 async function loadQuestions() {
 
 
-  questions_global = [
-    {
-      "question": "Which of the following is an example of supervised learning?",
-      "options": [
-        "Clustering customer data",
-        "Predicting house prices based on features",
-        "Finding patterns in unlabelled data",
-        "Generating new data points"
-      ],
-      "answer": 1,
-      "hint": "Supervised learning involves labeled data."
-    },
-    {
-      "question": "What does the term 'overfitting' refer to in machine learning?",
-      "options": [
-        "A model performing well on training data but poorly on unseen data",
-        "A model that underperforms on training data",
-        "A model with too few parameters",
-        "A model with too much regularization"
-      ],
-      "answer": 0,
-      "hint": "Overfitting occurs when the model is too complex and memorizes the training data."
-    },
-    {
-      "question": "Which of these algorithms is commonly used for classification problems?",
-      "options": [
-        "Linear Regression",
-        "K-Nearest Neighbors (KNN)",
-        "K-Means Clustering",
-        "Principal Component Analysis (PCA)"
-      ],
-      "answer": 1,
-      "hint": "Classification problems often involve predicting categories."
-    },
-    {
-      "question": "What is the purpose of a validation dataset?",
-      "options": [
-        "To train the model",
-        "To test the model on unseen data",
-        "To fine-tune hyperparameters",
-        "To generate predictions"
-      ],
-      "answer": 2,
-      "hint": "Validation data helps optimize the model without testing it."
-    },
-    {
-      "question": "Which metric is most appropriate for evaluating a regression model?",
-      "options": [
-        "Accuracy",
-        "Precision",
-        "Mean Squared Error (MSE)",
-        "Confusion Matrix"
-      ],
-      "answer": 2,
-      "hint": "Regression models require metrics that measure prediction errors."
-    },
-    {
-      "question": "What is the purpose of regularization in machine learning?",
-      "options": [
-        "To increase the model's complexity",
-        "To reduce overfitting",
-        "To improve training speed",
-        "To evaluate the model"
-      ],
-      "answer": 1,
-      "hint": "Regularization discourages the model from relying too much on specific features."
-    },
-    {
-      "question": "Which of the following is NOT a type of neural network?",
-      "options": [
-        "Convolutional Neural Network (CNN)",
-        "Recurrent Neural Network (RNN)",
-        "Bayesian Neural Network",
-        "Decision Tree Neural Network"
-      ],
-      "answer": 3,
-      "hint": "Neural networks typically don't use tree structures."
-    },
-    {
-      "question": "What does a confusion matrix measure?",
-      "options": [
-        "The accuracy of a regression model",
-        "The number of correct and incorrect predictions for classification",
-        "The loss during training",
-        "The similarity between clusters"
-      ],
-      "answer": 1,
-      "hint": "A confusion matrix is a table used for classification evaluations."
-    },
-    {
-      "question": "Which of these techniques can be used to handle missing data?",
-      "options": [
-        "Drop rows with missing values",
-        "Replace missing values with the mean or median",
-        "Use algorithms that support missing values",
-        "All of the above"
-      ],
-      "answer": 3,
-      "hint": "There are multiple ways to deal with missing data."
-    },
-    {
-      "question": "Which activation function is commonly used in the output layer for binary classification?",
-      "options": [
-        "ReLU",
-        "Sigmoid",
-        "Tanh",
-        "Softmax"
-      ],
-      "answer": 1,
-      "hint": "Binary classification outputs probabilities between 0 and 1."
-    }
-  ]
+  // questions_global = [
+  //   {
+  //     "question": "Which of the following is an example of supervised learning?",
+  //     "options": [
+  //       "Clustering customer data",
+  //       "Predicting house prices based on features",
+  //       "Finding patterns in unlabelled data",
+  //       "Generating new data points"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Supervised learning involves labeled data."
+  //   },
+  //   {
+  //     "question": "What does the term 'overfitting' refer to in machine learning?",
+  //     "options": [
+  //       "A model performing well on training data but poorly on unseen data",
+  //       "A model that underperforms on training data",
+  //       "A model with too few parameters",
+  //       "A model with too much regularization"
+  //     ],
+  //     "answer": 0,
+  //     "hint": "Overfitting occurs when the model is too complex and memorizes the training data."
+  //   },
+  //   {
+  //     "question": "Which of these algorithms is commonly used for classification problems?",
+  //     "options": [
+  //       "Linear Regression",
+  //       "K-Nearest Neighbors (KNN)",
+  //       "K-Means Clustering",
+  //       "Principal Component Analysis (PCA)"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Classification problems often involve predicting categories."
+  //   },
+  //   {
+  //     "question": "What is the purpose of a validation dataset?",
+  //     "options": [
+  //       "To train the model",
+  //       "To test the model on unseen data",
+  //       "To fine-tune hyperparameters",
+  //       "To generate predictions"
+  //     ],
+  //     "answer": 2,
+  //     "hint": "Validation data helps optimize the model without testing it."
+  //   },
+  //   {
+  //     "question": "Which metric is most appropriate for evaluating a regression model?",
+  //     "options": [
+  //       "Accuracy",
+  //       "Precision",
+  //       "Mean Squared Error (MSE)",
+  //       "Confusion Matrix"
+  //     ],
+  //     "answer": 2,
+  //     "hint": "Regression models require metrics that measure prediction errors."
+  //   },
+  //   {
+  //     "question": "What is the purpose of regularization in machine learning?",
+  //     "options": [
+  //       "To increase the model's complexity",
+  //       "To reduce overfitting",
+  //       "To improve training speed",
+  //       "To evaluate the model"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Regularization discourages the model from relying too much on specific features."
+  //   },
+  //   {
+  //     "question": "Which of the following is NOT a type of neural network?",
+  //     "options": [
+  //       "Convolutional Neural Network (CNN)",
+  //       "Recurrent Neural Network (RNN)",
+  //       "Bayesian Neural Network",
+  //       "Decision Tree Neural Network"
+  //     ],
+  //     "answer": 3,
+  //     "hint": "Neural networks typically don't use tree structures."
+  //   },
+  //   {
+  //     "question": "What does a confusion matrix measure?",
+  //     "options": [
+  //       "The accuracy of a regression model",
+  //       "The number of correct and incorrect predictions for classification",
+  //       "The loss during training",
+  //       "The similarity between clusters"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "A confusion matrix is a table used for classification evaluations."
+  //   },
+  //   {
+  //     "question": "Which of these techniques can be used to handle missing data?",
+  //     "options": [
+  //       "Drop rows with missing values",
+  //       "Replace missing values with the mean or median",
+  //       "Use algorithms that support missing values",
+  //       "All of the above"
+  //     ],
+  //     "answer": 3,
+  //     "hint": "There are multiple ways to deal with missing data."
+  //   },
+  //   {
+  //     "question": "Which activation function is commonly used in the output layer for binary classification?",
+  //     "options": [
+  //       "ReLU",
+  //       "Sigmoid",
+  //       "Tanh",
+  //       "Softmax"
+  //     ],
+  //     "answer": 1,
+  //     "hint": "Binary classification outputs probabilities between 0 and 1."
+  //   }
+  // ]
 
-  current_index = 0;
-  document.getElementById('loading').style.display = 'none';
-  document.querySelector('.quiz-container').style.display = 'block';
-  nextQuestion(); // Load the first question
+  // current_index = 0;
+  // document.getElementById('loading').style.display = 'none';
+  // document.querySelector('.quiz-container').style.display = 'block';
+  // nextQuestion(); // Load the first question
+  // return;
 
 
-  return;
 
   try {
     const data = await generateContent(GOOGLE_API_KEY, courseName, level);
