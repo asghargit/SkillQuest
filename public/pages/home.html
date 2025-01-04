@@ -178,14 +178,17 @@
           }
         });
     </script>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2024/12/20/02/20241220025414-I9KS92I8.js"></script>
+    
     <script>
         // Botpress chatbot configuration
         const botpressChatUrl = "https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/20/09/20241220091827-IGNVTOGU.json";
-
+    
         // Add event listener to the bot trigger
         const botTrigger = document.getElementById("bot-trigger");
         let chatIframe;
-
+    
         botTrigger.addEventListener("click", () => {
             // Dynamically load the Botpress chatbot
             chatIframe = document.createElement("iframe");
@@ -198,29 +201,30 @@
             chatIframe.style.height = "500px";
             chatIframe.style.border = "none";
             chatIframe.style.zIndex = "1000";
-
+    
             // Append iframe to the body
             document.body.appendChild(chatIframe);
-
+    
             // Create and add the close button
             const closeButton = document.createElement("button");
             closeButton.textContent = "Close";
             closeButton.classList.add("chat-close-btn");
             closeButton.id = "chat-close-btn";
-
+    
             document.body.appendChild(closeButton);
-
+    
             // Close the chatbot window on button click
             closeButton.addEventListener("click", () => {
                 chatIframe.remove();
                 closeButton.remove();
                 botTrigger.style.display = "flex"; // Show the trigger button again
             });
-
+    
             // Hide trigger button
             botTrigger.style.display = "none";
         });
     </script>
+    
     
 </body>
 </html>

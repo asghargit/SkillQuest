@@ -1,8 +1,9 @@
 // Add event listeners for buttons
 document.getElementById('retryButton').addEventListener('click', function () {
     // Redirect to the quiz page to retry
-    localStorage.setItem("step", step);
-    localStorage.setItem("course_tit", course.title);
+    let step = localStorage.getItem("step");
+    let course_tit = localStorage.getItem("course_tit");
+
     // Construct URL with query parameters
     const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
     // Redirect to quiz.html    
