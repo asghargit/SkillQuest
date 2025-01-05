@@ -1,3 +1,4 @@
+let level = localStorage.getItem("level");
 // Add event listeners for buttons
 document.getElementById('retryButton').addEventListener('click', function () {
     // Redirect to the quiz page to retry
@@ -113,14 +114,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Check if the score is above 6/10
     if (score > 6) {
-        nextButton.style.display = "block"; // Show the button if score > 6
+        if (level === 6) {
+            certiButton.style.display = "inline-block"; // Show the certificate button for level 6
+            nextButton.style.display = "none";         // Hide the next button for level 6
+        } else {
+            certiButton.style.display = "none";        // Hide the certificate button for other levels
+            nextButton.style.display = "inline-block"; // Show the next button for other levels
+        }
     } else {
-        nextButton.style.display = "none"; // Hide the button otherwise
+        certiButton.style.display = "none";            // Hide the certificate button if score <= 6
+        nextButton.style.display = "none";             // Hide the next button if score <= 6
     }
+    
 
     // Add event listener to the button
     nextButton.addEventListener("click", () => {
-        var level = localStorage.getItem("level");
+        
         const course_tit = localStorage.getItem("course_tit");
         console.log(level); 
         level = Number(level)+1;
@@ -159,6 +168,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Construct URL with query parameters
         const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
         // Redirect to quiz.html    
+        window.location.href = url;
+
+       
+
+    });
+
+    certiButton.addEventListener("click", () => {
+        const url = `certificate.html?`;
         window.location.href = url;
     });
 });
