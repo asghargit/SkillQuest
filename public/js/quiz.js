@@ -3,7 +3,7 @@ import { getPoints, updatePoints } from "../js/points.js";
 const countdownTextEl = document.getElementById('countdown-text');
 const circle = document.getElementById('countdown');
 const time_per_question = 45;
-const GOOGLE_API_KEY="AIzaSyDlfmn5W5RQeAUPsYfbDrDcVvHnx6qlCUE";
+const GOOGLE_API_KEY="AIzaSyAixT_pap05tU5OOqTynlXYRI5Qu3AuY2Q";
 const urlParams = new URLSearchParams(window.location.search);
 const courseName = urlParams.get("course");
 const step = urlParams.get("step");
