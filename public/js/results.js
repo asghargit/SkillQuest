@@ -1,7 +1,13 @@
 // Add event listeners for buttons
 document.getElementById('retryButton').addEventListener('click', function () {
     // Redirect to the quiz page to retry
-    window.location.href = '../pages/quiz.html';
+    let step = localStorage.getItem("step");
+    let course_tit = localStorage.getItem("course_tit");
+
+    // Construct URL with query parameters
+    const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
+    // Redirect to quiz.html    
+    window.location.href = url;
 });
 
 // document.getElementById('homeButton').addEventListener('click', function () {
@@ -90,3 +96,69 @@ function renderPerformanceGraph(performanceData) {
         }
     });
 }
+
+// next_level = document.getElementById('nextButton').addEventListener("click", () => {
+//     var step = localStorage.getItem("step");
+//     var course_tit = localStorage.getItem("course_tit");
+//     console.log(step);
+//     // Construct URL with query parameters
+//     const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
+//     // Redirect to quiz.html    
+//     window.location.href = url;
+// });
+// Assuming the score is stored in localStorage with the key "quizScore"
+document.addEventListener("DOMContentLoaded", () => {
+    const nextButton = document.getElementById('nextButton');
+    const score = parseInt(localStorage.getItem("finalScore"), 10); // Retrieve the stored score
+
+    // Check if the score is above 6/10
+    if (score > 6) {
+        nextButton.style.display = "block"; // Show the button if score > 6
+    } else {
+        nextButton.style.display = "none"; // Hide the button otherwise
+    }
+
+    // Add event listener to the button
+    nextButton.addEventListener("click", () => {
+        var level = localStorage.getItem("level");
+        const course_tit = localStorage.getItem("course_tit");
+        console.log(level); 
+        level = Number(level)+1;
+        let step;
+
+        switch (level) {
+            case 1:
+                step = "Introduction";
+                // Add your logic for Option 1 here
+                break;
+            case 2:
+                step = "Assessment 1";
+                // Add your logic for Option 2 here
+                break;
+            case 3:
+                step = "Quiz 1";
+                // Add your logic for Option 3 here
+                break;
+            case 4:
+                step = "Assessment 2";
+                // Add your logic for Option 4 here
+                break;
+            case 5:
+                step = "Quiz 2";
+                // Add your logic for Option 5 here
+                break;
+            case 6:
+                step = "Final Quiz";
+                // Add your logic for Option 6 here
+                break;
+            default:
+                step = null; // Or some other default value indicating an invalid level
+                // Add logic for invalid levels if necessary
+        }
+
+        // Construct URL with query parameters
+        const url = `quiz.html?course=${encodeURIComponent(course_tit)}&step=${encodeURIComponent(step)}`;
+        // Redirect to quiz.html    
+        window.location.href = url;
+    });
+});

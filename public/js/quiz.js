@@ -1,37 +1,88 @@
+import { getPoints, updatePoints } from "../js/points.js";
+
 const countdownTextEl = document.getElementById('countdown-text');
-const circle = document.getElementById('c2');
-const time_per_question = 45
-const GOOGLE_API_KEY="AIzaSyDN-IhHu2LE9NXM9dn2QUZJ2uOKohUGUTE"
+const circle = document.getElementById('countdown');
+const time_per_question = 45;
+const GOOGLE_API_KEY="AIzaSyDlfmn5W5RQeAUPsYfbDrDcVvHnx6qlCUE";
 const urlParams = new URLSearchParams(window.location.search);
 const courseName = urlParams.get("course");
 const step = urlParams.get("step");
 const answers = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-
 let countdownInterval = null
-let timeLeft = null; // total time in seconds
+let timeLeft = time_per_question; // total time in seconds
+const userUid = localStorage.getItem("userUid");  // Get the user UID from localStorage
+let level = null;
+console.log(step);
 
+switch (step) {
+  case "Introduction":
+      level = 1;
+      // Add your logic for Option 1 here
+      break;
+  case "Assessment 1":
+      level = 2;
+      // Add your logic for Option 2 here
+      break;
+  case "Quiz 1":
+      level = 3;
+      // Add your logic for Option 3 here
+      break;
+  case "Assessment 2":
+      level = 4;
+      // Add your logic for Option 4 here
+      break;
+  case "Quiz 2":
+      level = 5;
+      // Add your logic for Option 5 here
+      break;
+  case "Final Quiz":
+      level = 6;
+      // Add your logic for Option 6 here
+      break;
+  default:
+      level = 0;
+      // Add logic for invalid options if necessary
+}
+localStorage.setItem("level",level);
+console.log(level);
+// Assuming this code is inside an async function
+// async function fetchCurrentPoints() {
+  
+//   if (userUid) {
+//       const curr_points = await getPoints(userUid);  // Await the result of getPoints
+//       console.log("Current points: ", curr_points);  // You can now use the points
+//       return curr_points;  // Return the points if needed
+//   } else {
+//       console.log("No user UID found in localStorage");
+//       return null;
+//   }
+// }
+updatePointsDisplay();
+// Example of calling the function to get points
 function timer(){
-    timeLeft--;
-    countdownTextEl.textContent = timeLeft;
+    timeLeft-=0.1;
+    countdownTextEl.textContent = Math.round(timeLeft);
 
+    let color;
     // Change color based on remaining time
     if (timeLeft <= 15) {
-        circle.style.stroke = '#ff0000'; // Red for last 15 seconds
-
+      color = '#ff0000'; // Red for last 15 seconds
+      
     } else if (timeLeft <= 30) {
-        circle.style.stroke = '#ffa500'; // Yellow from 30 to 15 seconds
-
+      color = '#ffa500'; // Yellow from 30 to 15 seconds
+      
     } else {
-        circle.style.stroke = '#198051'; // Green for the initial 30 seconds
-
+      color = '#198051'; // Green for the initial 30 seconds
+      
     }
-
+    circle.style.background = `conic-gradient(${color} ${ timeLeft * 8 }deg,${ '#FFF'} 0deg)`;
+    
     if (timeLeft <= 0) {
-        nextQuestion(questions_global)
+        nextQuestion()
     }
-}
+} 
 
-questions_global = []
+let questions_global = []
 
 document.getElementById('nextButton').addEventListener('click', ()=>{
     nextQuestion(questions_global)
@@ -210,13 +261,16 @@ async function loadQuestions() {
   //   }
   // ]
 
+  // current_index = 0;
+  // document.getElementById('loading').style.display = 'none';
+  // document.querySelector('.quiz-container').style.display = 'block';
   // nextQuestion(); // Load the first question
-
-
   // return;
 
+
+
   try {
-    const data = await generateContent(GOOGLE_API_KEY, courseName, );
+    const data = await generateContent(GOOGLE_API_KEY, courseName, level);
 
     if (data && data.candidates && data.candidates[0].content) {
       const rawText = data.candidates[0].content.parts[0].text;
@@ -268,13 +322,28 @@ loadQuestions();
 
 
 // Function to load the next question
-function nextQuestion() {
+async function nextQuestion() {
+  // Updating points when answered within 15 secs 
+  circle.style.background = `conic-gradient(${'#198051'} ${ 360 }deg,${ '#FFF'} 0deg)`;
+  if(current_index>0 && current_index<10){
+  if(timeLeft>=30){
+    let curr_points = await getPoints(userUid);
+    let selected_answer = answers[current_index-1];
+    let correct_answer = questions_global[current_index-1].answer;
+    if(selected_answer == correct_answer){
+      var newPoints = curr_points + 10;
+      await updatePoints(userUid, newPoints);
+      document.getElementById('pointsValue').textContent = curr_points;
+    }
+  }
+ }
+
   if (current_index < questions_global.length) {
+
       clearInterval(countdownInterval);
       timeLeft = time_per_question;
       countdownTextEl.textContent = time_per_question;
-      circle.style.animationDuration = `${time_per_question}s`;
-      countdownInterval = setInterval(timer, 1000);
+      countdownInterval = setInterval(timer, 100);
 
       const question = questions_global[current_index];
       document.getElementById("hint-text").textContent = "";
@@ -282,19 +351,21 @@ function nextQuestion() {
       // Set the question text
       document.getElementById("question-text").textContent = question.question;
 
+      document.getElementById("hint-text").style.display = "none";
+
       // Set the options
       const options = document.querySelectorAll(".option-button");
       options.forEach((button, index) => {
           button.textContent = `${String.fromCharCode(65 + index)}: ${question.options[index]}`;
       });
-
+      
       // Increment the current index for the next question
       current_index++;
   } else {
 
     let correct = 0
     console.log(answers);
-    performanceData = []
+    let performanceData = []
       for(let i = 0; i<10; i++){
         performanceData.push({
           correct: answers[i] == questions_global[i].answer
@@ -304,27 +375,37 @@ function nextQuestion() {
         }
       }
 
-      console.log(performanceData);
-
-
       localStorage.setItem('finalScore', correct);
       localStorage.setItem('totalQuestions', 10);
       localStorage.setItem('correctAnswers', correct);
       localStorage.setItem('performanceData', JSON.stringify(performanceData));
-
       // Redirect to the results page when all questions are completed
       window.location.href = `/public/pages/results.html`; // Adjust for your server setup
 
   }
 }
 
-function showHint(){
-    if (current_index < questions_global.length){
-        document.getElementById("hint-text").textContent = questions_global[current_index].hint;
-    }
+async function showHint() {
+      const curr_points = await getPoints(userUid);  // Fetch current points for the user
+      if (curr_points >= 50) {
+          // Only show the hint if the points are greater than or equal to 50
+          var newPoints = curr_points-50;
+          await updatePoints(userUid, newPoints);
+          updatePointsDisplay();
+          if (current_index < questions_global.length) {
+              document.getElementById("hint-text").style.display = "block";
+              document.getElementById("hint-text").textContent = questions_global[current_index].hint;
+          }
+      } else {
+          // If points are less than 50, alert the user
+          alert("Not enough points to view the hint. You need at least 50 points.");
+      }
 }
+
 // window.location.href = '../pages/results.html';
-
-
-
+// Function to update the displayed points in the HTML
+async function updatePointsDisplay() {
+    const curr_points = await getPoints(userUid);  // Fetch points from Firestore
+    document.getElementById('pointsValue').textContent = curr_points;
+}
 

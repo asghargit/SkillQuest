@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuestiFy - Home</title>
-    <link rel="stylesheet" href="../css/homescreen.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/homescreen.css">
+    <!-- Firebase Configuration and Firebase SDK -->
+    <script src="../../src/utils/firebaseConfig.js" type="module"></script>
     <style>
         /* Styling for the robot emoji */
         .emoji {
@@ -49,6 +52,24 @@
             color: #ffcc00;
             border-radius: 10px;
         }
+
+        /* Close button styling */
+        .chat-close-btn {
+            position: fixed;
+            bottom: 510px;
+            right: 20px;
+            background-color: #000;
+            color: #ffcc00;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1001;
+        }
+        .chat-close-btn:hover {
+            background-color: #ffcc00;
+            color: #000;
+        }
     </style>
 </head>
 
@@ -84,10 +105,20 @@
 
     <!-- Hero Section -->
     <div class="bg-[#ffcc00] text-[#121212] flex flex-col items-center p-32">
-        <h1>Welcome to QuestiFy</h1>
+        <h1>Welcome to SkillQuest</h1>
         <p>Boost your skills with top-notch courses</p>
         <a href="../pages/login.html" class="bg-[#121212] text-[#ffcc00] p-2 px-5 mt-5 rounded-3xl">Begin Your Journey Now</a>
     </div>
+
+    <!-- About Us Section -->
+<div id="about" class="about-section">
+    <h2>About Us</h2>
+    <p>
+        At SkillQuest, we aim to empower learners by providing high-quality courses that are accessible and engaging.
+        Our mission is to bridge the gap between education and practical skills, ensuring our learners excel in their
+        chosen fields.
+    </p>
+</div>
 
     <!-- Courses Section -->
     <div class="home-container">
@@ -107,7 +138,31 @@
             </div>
         </div>
     </div>
+    
+    <div id="contact" style="background-color: #ffcc00; padding: 64px 24px; color: #000; text-align: center; font-family: Arial, sans-serif;">
+        <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 16px; color: #000;">Contact Us</h2>
+        <p style="font-size: 1.125rem; margin-bottom: 24px; line-height: 1.6;">
+            Have questions or need support? Reach out to us via the following channels:
+        </p>
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li style="font-size: 1rem; margin-bottom: 16px; line-height: 1.5;">
+                <span style="font-weight: bold; color: #000;">Email:</span> support@skillquest.com
+            </li>
+            <li style="font-size: 1rem; margin-bottom: 16px; line-height: 1.5;">
+                <span style="font-weight: bold; color: #000;">Phone:</span> +1 234 567 890
+            </li>
+            <li style="font-size: 1rem; margin-bottom: 16px; line-height: 1.5;">
+                <span style="font-weight: bold; color: #000;">Address:</span> 123 SkillQuest Lane, Learning City, EduWorld
+            </li>
+        </ul>
+    </div>
+    
+    
 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 SkillQuest. All rights reserved.</p>
+    </footer>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script> 
     <script type="module">
@@ -117,36 +172,59 @@
         onAuthStateChanged(auth, (user) => {
           if (user) {
             console.log('User is signed in:', user);
+            
           } else {
             window.location.href = 'login.html';
           }
         });
     </script>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2024/12/20/02/20241220025414-I9KS92I8.js"></script>
+    
     <script>
         // Botpress chatbot configuration
         const botpressChatUrl = "https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/20/09/20241220091827-IGNVTOGU.json";
-
+    
         // Add event listener to the bot trigger
         const botTrigger = document.getElementById("bot-trigger");
+        let chatIframe;
+    
         botTrigger.addEventListener("click", () => {
             // Dynamically load the Botpress chatbot
-            const iframe = document.createElement("iframe");
-            iframe.src = botpressChatUrl;
-            iframe.classList.add("botpress-chat");
-            iframe.style.position = "fixed";
-            iframe.style.bottom = "0";
-            iframe.style.right = "0";
-            iframe.style.width = "400px";
-            iframe.style.height = "500px";
-            iframe.style.border = "none";
-            iframe.style.zIndex = "1000";
-
+            chatIframe = document.createElement("iframe");
+            chatIframe.src = botpressChatUrl;
+            chatIframe.classList.add("botpress-chat");
+            chatIframe.style.position = "fixed";
+            chatIframe.style.bottom = "0";
+            chatIframe.style.right = "0";
+            chatIframe.style.width = "400px";
+            chatIframe.style.height = "500px";
+            chatIframe.style.border = "none";
+            chatIframe.style.zIndex = "1000";
+    
             // Append iframe to the body
-            document.body.appendChild(iframe);
-
-            // Remove trigger button after bot is loaded (optional)
+            document.body.appendChild(chatIframe);
+    
+            // Create and add the close button
+            const closeButton = document.createElement("button");
+            closeButton.textContent = "Close";
+            closeButton.classList.add("chat-close-btn");
+            closeButton.id = "chat-close-btn";
+    
+            document.body.appendChild(closeButton);
+    
+            // Close the chatbot window on button click
+            closeButton.addEventListener("click", () => {
+                chatIframe.remove();
+                closeButton.remove();
+                botTrigger.style.display = "flex"; // Show the trigger button again
+            });
+    
+            // Hide trigger button
             botTrigger.style.display = "none";
         });
     </script>
+    
+    
 </body>
 </html>

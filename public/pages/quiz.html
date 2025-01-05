@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game</title>
     <link rel="stylesheet" href="../css/quiz.css">
-    
+    <script src="../../src/utils/firebaseConfig.js" type="module"></script>
 </head>
 <body>
     <!-- Background animation -->
@@ -34,7 +34,7 @@
         <div class="top-bar">
             <!-- Points Remaining Tab -->
             <div class="points-remaining" style="display: flex; align-items: center; gap: 5px;">
-                QuestTokens: <span id="pointsValue">50</span>
+                QuestTokens: <span id="pointsValue"></span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);">
                     <path d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zm-5 9.938v3c1.237.299 2.605.482 4 .541v-3a21.166 21.166 0 0 1-4-.541zm6 .54v3a20.994 20.994 0 0 0 4-.541v-3a20.994 20.994 0 0 1-4 .541zm6-1.181v3c1.801-.755 3-1.857 3-3.297v-3c0 1.44-1.199 2.542-3 3.297zm-14 3v-3C3.2 13.542 2 12.439 2 11v3c0 1.439 1.2 2.542 3 3.297z"></path>
                 </svg>
@@ -42,15 +42,9 @@
             
             
             <button id ="Hints" class="hint-button">Hints</button>
-            <div id="countdown">
-                <svg viewBox="0 0 40 40">
-                    <g transform="translate(20 20) rotate(-90)" stroke-width="4" fill="none" stroke-linecap="round">
-                        <circle id="c3" r="18" />
-                        <circle id="c2" r="18" />
-                        <circle id="c1" r="2" cx="18" />
-                    </g>
-                    <text x="20" y="20" id="countdown-text">45</text>
-                </svg>
+            <div id="countdown" style="display: flex; background-color: white; border-radius: 50%; justify-content: center; align-items: center;">
+                <div style="background-color: black; height: 85%; width: 85%; position: relative; border-radius: 50%;"></div>
+                <div id="countdown-text" style="position: absolute; font-size: 30px;">45</div>
             </div>
             <div></div>
             <!-- <button class="hint-button">Combo points</button> -->
@@ -59,17 +53,21 @@
 
         <!-- Question Display -->
         <div class="question-section">
-            <div id="question-text">Which of the following statements about Python is true?</div>
+            <div id="question-text"></div>
         </div>
 
         <!-- Answer Options -->
         <div class="options-container">
-            <button class="option-button" id="optionA">A: Python is a compiled, statically typed programming language.</button>
-            <button class="option-button" id="optionB">B: Python supports both object-oriented and functional programming paradigms.</button>
-            <button class="option-button" id="optionC">C: Python does not allow dynamic typing.</button>
-            <button class="option-button" id="optionD">D: Python was developed by James Gosling in 1995</button>
+            <button class="option-button" id="optionA"></button>
+            <button class="option-button" id="optionB"></button>
+            <button class="option-button" id="optionC"></button>
+            <button class="option-button" id="optionD"></button>
         </div>
-        <div id="hint-text"></div>
+        <div id="hint-text">
+            
+        </div>
+        
+          
     </div>
 
     <!-- Skip and Next Buttons -->
@@ -79,6 +77,6 @@
     </div>
     
     <!-- <script src="../js/env.js"></script> -->
-    <script src="../js/quiz.js"></script>
+    <script type="module" src="../js/quiz.js"></script>
 </body>
 </html>

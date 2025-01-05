@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-bg: #ffcc00; /* Yellow background */
+  --primary-text: #000;  /* Black text */
+  --secondary-bg: #121212; /* Black background */
+  --secondary-text: #ffcc00; /* Yellow text */
+}
 /* Basic Styles */
 body {
     font-family: Arial, sans-serif;
@@ -166,4 +172,110 @@ body {
     }
   }
   
-  
+/* About Us Section */
+.about-section {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  text-align: center;
+  padding: 4rem 1rem;
+  margin-top: 2rem;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-section p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Contact Us Section */
+.contact-section {
+  background-color: var(--primary-text);
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 4rem 1rem;
+  margin-top: 2rem;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+.contact-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer Section */
+.footer {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+
+
+
+/* Contact Us Section */
+.contact-section {
+  background-color: var(--primary-text);
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 4rem 1rem;
+  margin-top: 2rem;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+.contact-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer Section */
+.footer {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer p {
+  margin: 0;
+}
