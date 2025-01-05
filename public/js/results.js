@@ -110,16 +110,18 @@ function renderPerformanceGraph(performanceData) {
 // Assuming the score is stored in localStorage with the key "quizScore"
 document.addEventListener("DOMContentLoaded", () => {
     const nextButton = document.getElementById('nextButton');
+    const certiButton = document.getElementById('certiButton');
     const score = parseInt(localStorage.getItem("finalScore"), 10); // Retrieve the stored score
-
+    
     // Check if the score is above 6/10
     if (score > 6) {
-        if (level === 6) {
+        if (level == 6) {
             certiButton.style.display = "inline-block"; // Show the certificate button for level 6
             nextButton.style.display = "none";         // Hide the next button for level 6
         } else {
             certiButton.style.display = "none";        // Hide the certificate button for other levels
             nextButton.style.display = "inline-block"; // Show the next button for other levels
+            console.log(level);
         }
     } else {
         certiButton.style.display = "none";            // Hide the certificate button if score <= 6

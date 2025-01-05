@@ -2,7 +2,7 @@
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { app } from "../../src/utils/firebaseConfig.js";
-import html2canvas from "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+
 
 // Initialize Firestore and Auth
 const auth = getAuth(app);
@@ -11,7 +11,7 @@ const db = getFirestore(app);
 const loadCertificateData = async () => {
     try {
         // Retrieve the userId from localStorage
-        const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem("userUid");
         if (!userId) {
             console.error("User ID not found in localStorage");
             return;
@@ -30,6 +30,13 @@ const loadCertificateData = async () => {
             document.getElementById("userName").textContent = userName;
             document.getElementById("courseName").textContent = courseName;
             console.log(`Certificate loaded for ${userName} - ${courseName}`);
+            //Set date
+            const currentDate = new Date();
+            const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${
+                String(currentDate.getMonth() + 1).padStart(2, '0')
+            }/${String(currentDate.getFullYear()).slice(-2)}`;
+            document.getElementById("certificateDate").textContent = formattedDate;
+
         } else {
             console.error("No such user found in Firestore");
         }
