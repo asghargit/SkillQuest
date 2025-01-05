@@ -14,66 +14,97 @@ body {
 .results-container {
     text-align: center;
     background: rgba(0, 0, 0, 0.85); /* Semi-transparent black */
-    padding: 20px 30px;
+    padding: 10px 20px; /* Reduced padding to decrease height */
     border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 450px; /* Smaller maximum width */
     box-shadow: 0 0 10px rgba(255, 204, 0, 0.7); /* Yellow glow */
 }
 
+/* Title */
 .results-container h1 {
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
     color: #ffcc00;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly smaller font size */
     font-weight: bold;
 }
 
-.results-content p {
-    margin: 10px 0;
-    font-size: 1.2em;
-    color: #fff; /* White text for contrast */
+/* Results Container */
+.results-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.85); /* Semi-transparent black */
+    padding: 5px 10px; /* Minimal padding */
+    border-radius: 8px; /* Slightly smaller corners */
+    width: 95%; /* Wider width for compactness */
+    max-width: 450px; /* Smaller max width */
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.7); /* Subtle yellow glow */
 }
 
-.results-content span {
-    color: #ffcc00; /* Highlight important info */
-}
-
-.performance-summary h2 {
-    margin-top: 20px;
+/* Title */
+.results-container h1 {
+    margin-bottom: 5px; /* Reduced margin */
     color: #ffcc00;
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Smaller font size */
+    font-weight: bold;
+}
+
+/* Results Content */
+.results-content p {
+    margin: 3px 0; /* Tightened spacing */
+    font-size: 0.9em; /* Smaller font size */
+    color: #fff; /* White text */
+}
+
+/* Performance Analysis */
+.performance-summary h2 {
+    margin-top: 5px; /* Reduced spacing */
+    color: #ffcc00;
+    font-size: 1rem; /* Smaller font size */
     border-bottom: 2px solid #ffcc00; /* Accent line */
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 2px; /* Minimal padding */
 }
 
 .performance-summary ul {
     list-style: none;
     padding: 0;
     text-align: left;
-    margin: 10px 0;
+    margin: 5px 0; /* Reduced margin */
 }
 
 .performance-summary li {
-    margin: 5px 0;
-    padding: 5px;
+    margin: 2px 0; /* Minimal vertical spacing */
+    padding: 2px 3px; /* Minimal padding */
     background: rgba(255, 255, 255, 0.1); /* Subtle contrast background */
-    border-radius: 5px;
+    border-radius: 2px; /* Slightly smaller corners */
     color: #fff; /* White text */
+    font-size: 0.8em; /* Reduced font size */
+}
+
+/* Performance Analysis Chart */
+.chart-container {
+    max-height: 120px; /* Further limit chart height */
+    margin-bottom: 5px; /* Reduced spacing below chart */
 }
 
 /* Buttons */
 .control-button {
-    padding: 10px 20px;
-    margin: 10px 5px;
+    padding: 5px 10px; /* Minimal padding */
+    margin: 5px; /* Tight spacing */
     background: #ffcc00;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px; /* Slightly smaller corners */
     color: #121212;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.8em; /* Smaller font size */
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Adjust Chart and Content Height */
+.chart-container canvas {
+    height: 100%; /* Ensure chart scales down */
+    max-height: 120px; /* Limit maximum height of the chart */
 }
 
 .control-button:hover {
