@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate of Completion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-yellow-500 flex items-center justify-center min-h-screen flex-col">
+
+  <!-- Certificate Container -->
+  <div id="certificate" 
+     class="relative max-w-[90%] md:max-w-[75%] lg:max-w-[70%] bg-black border-8 border-yellow-500 text-center rounded-lg p-14 sm:p-16 lg:p-20 shadow-lg">
+
+    <!-- Header -->
+    <h1 class="text-4xl sm:text-5xl font-bold uppercase mb-6">Certificate of Completion</h1>
+    <p class="text-lg sm:text-xl mb-8">This is to certify that</p>
+
+    <!-- User Name -->
+    <div id="userName" class="text-2xl sm:text-3xl font-bold text-white mb-6">NAME SURNAME</div>
+
+    <!-- Course Name -->
+    <p class="text-lg sm:text-xl mb-4">Has successfully completed</p>
+    <div id="courseName" class="text-xl sm:text-2xl font-semibold text-yellow-500 mb-8">Course of Study</div>
+
+    <!-- Footer -->
+    <div class="flex justify-between items-center mt-10 sm:mt-14 text-base sm:text-lg">
+      <div class="flex flex-col items-start">
+        <span>Date:</span>
+        <span class="block mt-3 border-t border-yellow-500 w-40 sm:w-48"></span>
+      </div>
+      <div class="flex flex-col items-end">
+        <span>Signature:</span>
+        <span class="block mt-3 border-t border-yellow-500 w-40 sm:w-48"></span>
+      </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="absolute top-36 right-10 bg-yellow-500 text-black font-bold text-base sm:text-lg lg:text-xl 
+                w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full flex items-center justify-center shadow">
+  <span class="text-center leading-none">Course Completion</span>
+</div>
+</div>
+
+
+  <!-- Download Button -->
+  <button id="downloadBtn" 
+          class="mt-8 px-4 py-2 bg-yellow-500 text-black font-semibold rounded shadow hover:bg-yellow-400">
+    Download Certificate
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // Dynamic User and Course Data
+    const userName = "Alice Smith"; // Replace with dynamic data
+    const courseName = "Web Development"; // Replace with dynamic data
+
+    // Inject data into the certificate
+    document.getElementById("userName").textContent = userName;
+    document.getElementById("courseName").textContent = courseName;
+
+    // Download certificate as PNG
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      const certificate = document.getElementById("certificate");
+      html2canvas(certificate, { scale: 2 }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `${userName}_Certificate.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }).catch(error => {
+        console.error("Error downloading certificate:", error);
+      });
+    });
+  </script>
+</body>
+</html>
