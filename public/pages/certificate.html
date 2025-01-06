@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificate of Completion</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../../src/utils/firebaseConfig.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   
 </head>
 <body class="bg-black text-yellow-500 flex items-center justify-center min-h-screen flex-col">
@@ -26,20 +28,21 @@
 
     <!-- Footer -->
     <div class="flex justify-between items-center mt-10 sm:mt-14 text-base sm:text-lg">
-      <div class="flex flex-col items-start">
-        <span>Date:</span>
-        <span class="block mt-3 border-t border-yellow-500 w-40 sm:w-48"></span>
+      <div class="flex items-center">
+          <span>Date:</span>
+          <span id="certificateDate" class="ml-2 border-b p-2 border-yellow-500 w-40 sm:w-48"></span>
       </div>
       <div class="flex flex-col items-end">
-        <span>Signature:</span>
-        <span class="block mt-3 border-t border-yellow-500 w-40 sm:w-48"></span>
+          <span>Signature:</span>
+          <span class="block mt-3 border-t p-2 border-yellow-500 w-40 sm:w-48"></span>
       </div>
-    </div>
+  </div>
+  
 
     <!-- Badge -->
     <div class="absolute top-36 right-10 bg-yellow-500 text-black font-bold text-base sm:text-lg lg:text-xl 
                 w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full flex items-center justify-center shadow">
-  <span class="text-center leading-none">Course Completion</span>
+  <span class="text-center leading-none py-2">Course Completion</span>
 </div>
 </div>
 
@@ -49,6 +52,11 @@
           class="mt-8 px-4 py-2 bg-yellow-500 text-black font-semibold rounded shadow hover:bg-yellow-400">
     Download Certificate
   </button>
-  
+  <script type="module">
+    import initCertificate from '../../public/js/certificate.js'; // Correct path to your certificate.js file
+    
+    // Initialize certificate functionality
+    initCertificate();
+</script>
 </body>
 </html>
